@@ -1,5 +1,12 @@
 # MoSQL: a MongoDB → SQL streaming translator
 
+## Movebubble specific instructions
+
+This repo has been forked from one where the driver has been updated to use the latest MongoDB driver, which is required to support new types that we use e.g. decimal. We have also made some other tweaks for our purposes.
+
+If you need to make a fresh install of mosql, you will need to build and install two gems yourself: this one, and the mongoriver one that it depends on. You can find that one at https://github.com/johnnason/mongoriver/tree/mongo_driver_2_support. Please ensure that you build from the mongo_driver_2_support branch for both gems. You should end up with two gems with version 0.5.0, which you can then copy to the target machine and install. Install mongoriver first and then mosql.
+
+
 > _**MoSQL is no longer being actively maintained.**_
 > _If you are interested in helping maintain this repository, please let us know.  We would love for it to find a forever home with someone who can give it the love it needs!_
 
