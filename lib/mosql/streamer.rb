@@ -52,7 +52,7 @@ module MoSQL
       begin
         @schema.copy_data(table.db, ns, items)
       rescue Sequel::DatabaseError => e
-        log.debug("Bulk insert error (#{e}), attempting invidual upserts...")
+        log.debug("Bulk insert error (#{e}), attempting individual upserts...")
         cols = @schema.all_columns(@schema.find_ns(ns))
         items.each do |it|
           h = {}
@@ -109,7 +109,7 @@ module MoSQL
         spec = @schema.find_db(dbname)
 
         if(spec.nil?)
-          log.info("Mongd DB '#{dbname}' not found in config file. Skipping.")
+          log.info("Mongo DB '#{dbname}' not found in config file. Skipping.")
           next
         end
 
@@ -141,7 +141,7 @@ module MoSQL
 
       start    = Time.now
       sql_time = 0
-      with_retries do
+      #with_retries do
         collection.find(filter, :batch_size => BATCH).each do |obj|
           batch << @schema.transform(ns, obj)
           count += 1
@@ -156,7 +156,7 @@ module MoSQL
             exit(0) if @done
           end
         end
-      end
+     # end
 
       unless batch.empty?
         bulk_upsert(table, ns, batch)
