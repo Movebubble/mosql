@@ -1,0 +1,11 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - 2.1.2
+services:
+  - mongodb
+  - postgresql
+before_script:
+    - psql -c 'create database mosql;' -U postgres
+env:
+  - MONGOSQL_TEST_SQL=postgres://localhost/mosql
