@@ -1,3 +1,5 @@
+require 'awesome_print'
+
 module MoSQL
   class SchemaError < StandardError; end;
 
@@ -186,11 +188,14 @@ module MoSQL
     end
 
     def transform_primitive(v, type=nil)
-      case v
+	  case v
       when BSON::ObjectId, Symbol
         v.to_s
       when BSON::Binary
-        if type.downcase == 'uuid'
+	    if type == nil
+		  puts v
+		  Sequel::SQL::Blob.new(v.data.to_s)
+        elsif type.downcase == 'uuid'
           v.data.to_s.unpack("H*").first
         else
           Sequel::SQL::Blob.new(v.data.to_s)
@@ -223,12 +228,29 @@ module MoSQL
           v = fetch_and_delete_dotted(obj, source)
           case v
           when Hash
-            v = JSON.dump(Hash[v.map { |k,v| [k, transform_primitive(v)] }])
+			begin
+				blob = Hash.new
+				hash = v.map { |k,v| [k, transform_primitive(v)] }
+				hash.each do |k,v|
+				  if v.is_a?(Sequel::SQL::Blob)
+					v = nil
+				  end
+					blob[k] = v
+				end
+				v = JSON.dump(blob)
+			rescue Encoding::UndefinedConversionError => e
+				puts e
+				exit 0
+			rescue => e
+				puts e
+				exit 0
+			end
           when Array
             v = v.map { |it| transform_primitive(it) }
             if col[:array_type]
               v = Sequel.pg_array(v, col[:array_type])
             else
+			  ap v
               v = JSON.dump(v)
             end
           else
