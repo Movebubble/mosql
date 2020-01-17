@@ -342,7 +342,11 @@ module MoSQL
       when Sequel::SQL::Blob
         "\\\\x" + [val].pack("h*")
       else
-        val.to_s.gsub(/([\\\t\n\r])/, '\\\\\\1')
+        if val.class == Sequel::Postgres::PGArray
+          val = "{" + val.join(",") + "}"
+        else
+          val.to_s.gsub(/([\\\t\n\r])/, '\\\\\\1')
+        end
       end
     end
 
