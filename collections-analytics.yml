@@ -1,0 +1,75 @@
+analyticsDB:
+  appInstalls:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - app_key:
+      :source: appKey
+      :type: CHARACTER VARYING
+    - app_version:
+      :source: appVersion
+      :type: CHARACTER VARYING
+    - type:
+      :source: type
+      :type: CHARACTER VARYING
+    - device_id:
+      :source: deviceDetails.deviceId
+      :type: CHARACTER VARYING
+    - platform_type:
+      :source: deviceDetails.platformType
+      :type: CHARACTER VARYING
+    - brand:
+      :source: deviceDetails.brand
+      :type: CHARACTER VARYING
+    - build_number:
+      :source: deviceDetails.buildNumber
+      :type: CHARACTER VARYING
+    - battery_level:
+      :source: deviceDetails.batteryLevel
+      :type: CHARACTER VARYING
+    - device_type:
+      :source: deviceDetails.deviceType
+      :type: CHARACTER VARYING
+    - manufacturer:
+      :source: deviceDetails.manufacturer
+      :type: CHARACTER VARYING
+    - version:
+      :source: deviceDetails.version
+      :type: CHARACTER VARYING
+    - system_name:
+      :source: deviceDetails.systemName
+      :type: CHARACTER VARYING
+    - system_version:
+      :source: deviceDetails.systemVersion
+      :type: CHARACTER VARYING
+    - device_unique_id:
+      :source: deviceDetails.deviceUniqueId
+      :type: CHARACTER VARYING
+    - used_memory:
+      :source: deviceDetails.usedMemory
+      :type: CHARACTER VARYING
+    - os_version:
+      :source: deviceDetails.osVersion
+      :type: CHARACTER VARYING
+    - locale:
+      :source: deviceDetails.locale
+      :type: CHARACTER VARYING
+    - pn_enabled:
+      :source: deviceDetails.pnEnabled
+      :type: BOOLEAN
+    - source_type:
+      :source: typeDetails.sourceType
+      :type: CHARACTER VARYING
+    - source_details:
+      :source: typeDetails.sourceDetails
+      :type: CHARACTER VARYING
+    - client_date_time:
+      :source: clientDateTime
+      :type: timestamp without time zone
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    :meta:
+      :table: app_installs
+
