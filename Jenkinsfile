@@ -4,9 +4,11 @@
 
 def dockerRegistryHost   = 'docker.artifactory.int.mgmt.movebubble.com'
 def dockerRegistry       = "https://${dockerRegistryHost}"
+def dockerRegistryCredId = 'docker-artifactory-credentials'
 def artifactoryCredId    = 'artifactory-credentials'
 
 def deployDockerImage    = "${dockerRegistryHost}/helmfile:v0.86.8"
+def helmRepoUrl          = 'https://artifactory.int.mgmt.movebubble.com/artifactory/helm'
 
 def slackTeam            = 'Movebubble'
 def slackChannel         = '#dev-notifications'
