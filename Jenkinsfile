@@ -127,6 +127,7 @@ pipeline {
                 -e KUBE_CONTEXT=${stageEnvName} \
                 -e AWS_DEFAULT_REGION=${awsRegion} \
                 -e SOPS_PGP_FP=${sopsPgpFp} \
+                -e HELM_REPO_URL=${helmRepoUrl} \
                 -e HOME=/tmp"
         }
       }
@@ -188,6 +189,7 @@ pipeline {
                 -e KUBE_CONTEXT=${prodEnvName} \
                 -e AWS_DEFAULT_REGION=${awsRegion} \
                 -e SOPS_PGP_FP=${sopsPgpFp} \
+                -e HELM_REPO_URL=${helmRepoUrl} \
                 -e HOME=/tmp"
         }
       }
