@@ -143,7 +143,7 @@ pipeline {
             sh '''
               IMAGE_TAG="$(cat ${THE_FILE_VERSION})"
               APP_NAME="$(cat $THE_FILE_NAME)"
-            
+
               cd "${WORKDIR}/kubernetes"
 
               aws eks update-kubeconfig --name $KUBE_CONTEXT --alias $KUBE_CONTEXT
@@ -203,6 +203,9 @@ pipeline {
                              usernameVariable: 'ARTIFACTORY_USERNAME')]) {
           withEnv(["THE_FILE_VERSION=${fileVersionName}", "THE_FILE_NAME=${fileAppName}"]) {
             sh '''
+              IMAGE_TAG="$(cat ${THE_FILE_VERSION})"
+              APP_NAME="$(cat $THE_FILE_NAME)"
+
               cd "${WORKDIR}/kubernetes"
 
               aws eks update-kubeconfig --name $KUBE_CONTEXT --alias $KUBE_CONTEXT
@@ -212,9 +215,6 @@ pipeline {
 
               helm init --client-only
               helm repo add --username=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_PASSWORD} movebubble ${HELM_REPO_URL}
-
-              IMAGE_TAG="$(cat ${THE_FILE_VERSION})"
-              APP_NAME="$(cat $THE_FILE_NAME)"
 
               helmfile \
                 -f helmfile/applications.yaml \
