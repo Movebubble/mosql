@@ -21,7 +21,7 @@ def gitCredentialsId     = 'jenkins-github'
 def infraDirName         = 'infrastructure'
 def infraRepoName        = 'git@github.com:Movebubble/infrastructure.git'
 
-def stageEnvName    = 'testing'
+def stageEnvName    = 'stage'
 def prodEnvName     = 'prod'
 def awsRegion       = 'eu-west-2'
 def fileVersionName = 'VERSION.txt'
@@ -130,8 +130,9 @@ pipeline {
       steps {
         unstash "app_and_version"
 
-        withCredentials([usernamePassword(credentialsId: artifactoryCredId,
-                passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')]) {
+        withCredentials([file(credentialsId: devopsGPGKeyCredId, variable: 'GPG_FILE'),
+            usernamePassword(credentialsId: artifactoryCredId, passwordVariable: 'ARTIFACTORY_PASSWORD',
+                             usernameVariable: 'ARTIFACTORY_USERNAME')]) {
           withEnv(["THE_FILE_VERSION=${fileVersionName}", "THE_FILE_NAME=${fileAppName}"]) {
             sh '''
               cd "${WORKDIR}/kubernetes"
@@ -189,8 +190,9 @@ pipeline {
       steps {
         unstash "app_and_version"
 
-        withCredentials([usernamePassword(credentialsId: artifactoryCredId,
-                passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')]) {
+        withCredentials([file(credentialsId: devopsGPGKeyCredId, variable: 'GPG_FILE'),
+            usernamePassword(credentialsId: artifactoryCredId, passwordVariable: 'ARTIFACTORY_PASSWORD',
+                             usernameVariable: 'ARTIFACTORY_USERNAME')]) {
           withEnv(["THE_FILE_VERSION=${fileVersionName}", "THE_FILE_NAME=${fileAppName}"]) {
             sh '''
               cd "${WORKDIR}/kubernetes"
