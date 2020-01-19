@@ -561,6 +561,15 @@ chatDB:
     - property_address:
       :source: details.propertyAddress
       :type: CHARACTER VARYING
+    - created_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - created_by_chat_role:
+      :source: createdBy.chatRole
+      :type: CHARACTER VARYING
+    - created_by_user_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
     - created_at:
       :source: createdAt
       :type: timestamp without time zone
