@@ -20,6 +20,8 @@ def gitCredentialsId     = 'jenkins-github'
 
 def infraDirName         = 'infrastructure'
 def infraRepoName        = 'git@github.com:Movebubble/infrastructure.git'
+def sopsPgpFp            = '3B762AAAD87FF916301898DCBD394F0FF50842CE'
+def devopsGPGKeyCredId   = 'devops-gpg-private-key-file'
 
 def stageEnvName    = 'stage'
 def prodEnvName     = 'prod'
@@ -124,6 +126,7 @@ pipeline {
                 -e WEBAPP_NAME=${env.WEBAPP_NAME} \
                 -e KUBE_CONTEXT=${stageEnvName} \
                 -e AWS_DEFAULT_REGION=${awsRegion} \
+                -e SOPS_PGP_FP=${sopsPgpFp} \
                 -e HOME=/tmp"
         }
       }
@@ -184,6 +187,7 @@ pipeline {
                 -e WEBAPP_NAME=${env.WEBAPP_NAME} \
                 -e KUBE_CONTEXT=${prodEnvName} \
                 -e AWS_DEFAULT_REGION=${awsRegion} \
+                -e SOPS_PGP_FP=${sopsPgpFp} \
                 -e HOME=/tmp"
         }
       }
