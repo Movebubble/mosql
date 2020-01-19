@@ -131,6 +131,9 @@ accountDB:
     - user_id:
       :source: userId
       :type: CHARACTER VARYING
+    - full_name:
+      :source: fullName
+      :type: CHARACTER VARYING
     - first_name:
       :source: firstName
       :type: CHARACTER VARYING
