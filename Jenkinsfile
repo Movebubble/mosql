@@ -159,8 +159,15 @@ pipeline {
       }
     }
 
-    timeout(time: 24, unit: "HOURS") {
-      input message: "Deploy to Production?", ok: 'Yes'
+    stage('Whether to Deploy to Production') {
+        when {
+          branch 'master'
+        }
+        steps {
+            timeout(time: 24, unit: "HOURS") {
+                input message: "Deploy to Production?", ok: 'Yes'
+            }
+        }
     }
 
     stage('Deploy to Prod') {
