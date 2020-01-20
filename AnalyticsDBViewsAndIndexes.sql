@@ -258,7 +258,7 @@ CREATE OR REPLACE FUNCTION refresh_user_apps_logins_materialized_view()
   RETURNS TRIGGER LANGUAGE plpgsql
   AS $$
   BEGIN
-  REFRESH MATERIALIZED VIEW user_app_logins;
+  REFRESH MATERIALIZED VIEW users_app_logins;
   RETURN NULL;
   END $$;
 
