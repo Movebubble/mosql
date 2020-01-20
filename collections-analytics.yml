@@ -61,13 +61,13 @@ analyticsDB:
     - source_details:
       :source: typeDetails.details
       :type: CHARACTER VARYING
-    - source_mediaSource:
+    - source_media_source:
       :source: typeDetails.mediaSource
       :type: CHARACTER VARYING
-    - source_installType:
+    - source_install_type:
       :source: typeDetails.installType
       :type: CHARACTER VARYING
-    - source_isFirstLaunch:
+    - source_is_first_launch:
       :source: typeDetails.isFirstLaunch
       :type: CHARACTER VARYING
     - client_date_time:
