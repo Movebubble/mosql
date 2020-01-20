@@ -58,16 +58,16 @@ analyticsDB:
     - pn_enabled:
       :source: deviceDetails.pnEnabled
       :type: BOOLEAN
-    - source_type:
+    - source_details:
       :source: typeDetails.details
       :type: CHARACTER VARYING
-    - source_details:
+    - source_mediaSource:
       :source: typeDetails.mediaSource
       :type: CHARACTER VARYING
-    - source_details:
+    - source_installType:
       :source: typeDetails.installType
       :type: CHARACTER VARYING
-    - source_details:
+    - source_isFirstLaunch:
       :source: typeDetails.isFirstLaunch
       :type: CHARACTER VARYING
     - client_date_time:
