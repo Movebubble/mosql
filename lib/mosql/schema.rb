@@ -322,6 +322,8 @@ module MoSQL
         begin
           pg.get_result.check
         rescue PGError => e
+          log.error { "Error sql: #{sql}" }
+          log.error { "Error exception: #{e}" }
           db.send(:raise_error, e)
         end
       end
