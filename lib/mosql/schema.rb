@@ -214,7 +214,14 @@ module MoSQL
 
       # Do a deep clone, because we're potentially going to be
       # mutating embedded objects.
-      obj = Marshal.load(Marshal.dump(obj))
+
+      begin
+        obj = Marshal.load(Marshal.dump(obj))
+      rescue ArgumentError => e
+        log.error { "Error marshaling obj: #{obj} with e: #{e}" }
+        raise
+      end
+
 
       row = []
       schema[:columns].each do |col|
