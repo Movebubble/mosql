@@ -344,9 +344,6 @@ propertyDB:
       :source: areas.fuzzyMatchingAreas
       :type: TEXT ARRAY
       :array_type: TEXT ARRAY
-    - available_at:
-      :source: availableAt
-      :type: timestamp without time zone
     - refreshed_at:
       :source: refreshedAt
       :type: timestamp without time zone
