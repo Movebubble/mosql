@@ -1,0 +1,72 @@
+accountDB:
+  renterSearchProductDetails:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - user_id:
+      :source: userId
+      :type: CHARACTER VARYING
+    - full_name:
+      :source: fullName
+      :type: CHARACTER VARYING
+    - first_name:
+      :source: firstName
+      :type: CHARACTER VARYING
+    - last_name:
+      :source: lastName
+      :type: CHARACTER VARYING
+    - mobile_number:
+      :source: mobileNumber
+      :type: CHARACTER VARYING
+    - employer:
+      :source: employer
+      :type: CHARACTER VARYING
+    - job_title:
+      :source: jobTitle
+      :type: CHARACTER VARYING
+    - is_flexible_move_date:
+      :source: moveDate.flexibleDate
+      :type: BOOLEAN
+    - move_date:
+      :source: moveDate.date
+      :type: timestamp without time zone
+    - contract_length:
+      :source: contractLength
+      :type: CHARACTER VARYING
+    - pets:
+      :source: pets
+      :type: TEXT ARRAY
+      :array_type: TEXT ARRAY
+    - about_me:
+      :source: aboutMe
+      :type: CHARACTER VARYING
+    - income:
+      :source: houseHoldIncome
+      :type: BIGINT
+    - profile_completed_percents:
+      :source: populationPercentage
+      :type: DECIMAL
+    - city_key:
+      :source: cityKey
+      :type: CHARACTER VARYING
+    - moving_situation:
+      :source: movingSituation
+      :type: CHARACTER VARYING
+    - profile_image:
+      :source: profileImage.smallUrl
+      :type: CHARACTER VARYING
+    - recive_news_enabled:
+      :source: marketing.receiveNews
+      :type: BOOLEAN
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - updated_at:
+      :source: updatedAt
+      :type: timestamp without time zone
+    - last_seen:
+      :source: lastSeen
+      :type: timestamp without time zone
+    :meta:
+      :table: renters_details

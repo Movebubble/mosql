@@ -1,0 +1,35 @@
+accountDB:
+  agentSearchProductDetails:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - user_id:
+      :source: userId
+      :type: CHARACTER VARYING
+    - full_name:
+      :source: fullName
+      :type: CHARACTER VARYING
+    - first_name:
+      :source: firstName
+      :type: CHARACTER VARYING
+    - last_name:
+      :source: lastName
+      :type: CHARACTER VARYING
+    - mobile_number:
+      :source: mobileNumber
+      :type: CHARACTER VARYING
+    - app_notifications_enabled:
+      :source: appSettings.enabled
+      :type: BOOLEAN
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - updated_at:
+      :source: updatedAt
+      :type: timestamp without time zone
+    - last_seen:
+      :source: lastSeen
+      :type: timestamp without time zone
+    :meta:
+      :table: agents_details
