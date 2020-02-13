@@ -115,10 +115,8 @@ module MoSQL
       log.outputters = Log4r::StdoutOutputter.new(STDERR)
       if options[:verbose] >= 1
         log.level = Log4r::DEBUG
-        Mongo::Logger.logger.level = Logger::DEBUG
       else
         log.level = Log4r::INFO
-        Mongo::Logger.logger.level = Logger::INFO
       end
     end
 
