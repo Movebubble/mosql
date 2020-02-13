@@ -154,12 +154,14 @@ pipeline {
               helm init --client-only
               helm repo add --username=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_PASSWORD} movebubble ${HELM_REPO_URL}
 
-              helmfile \
-                -f helmfile/applications.yaml \
-                --state-values-set image.tag=${IMAGE_TAG} \
-                -e $KUBE_CONTEXT \
-                -l app_name=$APP_NAME \
-                apply
+              for APP in $APP_NAME ${APP_NAME}-agents ${APP_NAME}-org ${APP_NAME}-renters ${APP_NAME}-users ${APP_NAME}-analytics; do
+                helmfile \
+                  -f helmfile/applications.yaml \
+                  --state-values-set image.tag=${IMAGE_TAG} \
+                  -e $KUBE_CONTEXT \
+                  -l app_name=$APP \
+                  apply
+                done
             '''
           }
         }
@@ -216,12 +218,14 @@ pipeline {
               helm init --client-only
               helm repo add --username=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_PASSWORD} movebubble ${HELM_REPO_URL}
 
-              helmfile \
-                -f helmfile/applications.yaml \
-                --state-values-set image.tag=${IMAGE_TAG} \
-                -e $KUBE_CONTEXT \
-                -l app_name=$APP_NAME \
-                apply
+              for APP in $APP_NAME ${APP_NAME}-agents ${APP_NAME}-org ${APP_NAME}-renters ${APP_NAME}-users ${APP_NAME}-analytics; do
+                helmfile \
+                  -f helmfile/applications.yaml \
+                  --state-values-set image.tag=${IMAGE_TAG} \
+                  -e $KUBE_CONTEXT \
+                  -l app_name=$APP \
+                  apply
+              done
             '''
           }
         }
