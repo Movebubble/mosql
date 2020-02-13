@@ -338,3 +338,9 @@ CREATE INDEX property_sources_id_idx ON property_sources (id);
 DROP INDEX IF EXISTS units_packages_id_idx;
 CREATE INDEX units_packages_id_idx ON units_packages (id);
 
+DROP INDEX IF EXISTS acl_operation_and_subject_type_and_subject_id_idx;
+CREATE INDEX acl_operation_and_subject_type_and_subject_id_idx ON acl (operation,subject_type,subject_id);
+
+DROP INDEX IF EXISTS acl_operation_and_object_type_and_object_id_idx;
+CREATE INDEX acl_operation_and_object_type_and_object_id_idx ON acl (operation,object_type,object_id);
+
