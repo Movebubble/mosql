@@ -78,6 +78,41 @@ accountDB:
       :table: units
       :extra_props: JSON
 
+  acl:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - operation:
+        :source: operation
+        :type: CHARACTER VARYING
+      - object_type:
+        :source: object.type
+        :type: CHARACTER VARYING
+      - object_id:
+        :source: object.id
+        :type: CHARACTER VARYING
+      - subject_type:
+        :source: subject.type
+        :type: CHARACTER VARYING
+      - subject_id:
+        :source: subject.id
+        :type: CHARACTER VARYING
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+      - created_by:
+        :source: createdBy.entityId
+        :type: CHARACTER VARYING
+      - updated_at:
+        :source: updatedAt
+        :type: timestamp without time zone
+      - updated_by:
+        :source: updatedBy.entityId
+        :type: CHARACTER VARYING
+    :meta:
+      :table: acl
+      :extra_props: JSON
 
   packages:
     :columns:
