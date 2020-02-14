@@ -1,0 +1,97 @@
+chatDB:
+  chats:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - type:
+      :source: type
+      :type: CHARACTER VARYING
+    - property_id:
+      :source: typeDetails.propertyId
+      :type: CHARACTER VARYING
+    - proerty_unit_id:
+      :source: typeDetails.propertyUnitId
+      :type: CHARACTER VARYING
+    - enquirer_user_id:
+      :source: typeDetails.enquirerUserId
+      :type: CHARACTER VARYING
+    - enquiry_id:
+      :source: typeDetails.enquiryId
+      :type: CHARACTER VARYING
+    - processing_city:
+      :source: typeDetails.processingCity
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - created_by:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    :meta:
+      :table: chats
+
+
+  chatMembers:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - chat_id:
+      :source: chatId
+      :type: CHARACTER VARYING
+    - user_id:
+      :source: userId
+      :type: CHARACTER VARYING
+    - user_chat_role:
+      :source: userChatRole
+      :type: CHARACTER VARYING
+    - chat_type:
+      :source: chatType
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    :meta:
+      :table: chat_members
+      :extra_props: JSON
+
+  messages:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - chat_id:
+      :source: chatId
+      :type: CHARACTER VARYING
+    - type:
+      :source: type
+      :type: CHARACTER VARYING
+    - text:
+      :source: details.text
+      :type: CHARACTER VARYING
+    - property_id:
+      :source: details.propertyId
+      :type: CHARACTER VARYING
+    - property_name:
+      :source: details.propertyName
+      :type: CHARACTER VARYING
+    - property_address:
+      :source: details.propertyAddress
+      :type: CHARACTER VARYING
+    - created_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - created_by_chat_role:
+      :source: createdBy.chatRole
+      :type: CHARACTER VARYING
+    - created_by_user_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    :meta:
+      :table: chat_messages
+      :extra_props: JSON
+

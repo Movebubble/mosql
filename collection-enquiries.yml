@@ -1,0 +1,38 @@
+propertyDB:
+  enquiries:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - user_id:
+      :source: userId
+      :type: CHARACTER VARYING
+    - property_id:
+      :source: propertyId
+      :type: CHARACTER VARYING
+    - property_unit_id:
+      :source: propertyUnitId
+      :type: CHARACTER VARYING
+    - property_city_key:
+      :source: propertyCityKey
+      :type: CHARACTER VARYING
+    - property_system_type:
+      :source: propertySystemType
+      :type: CHARACTER VARYING
+    - property_org_id:
+      :source: propertyOrganizationId
+      :type: CHARACTER VARYING
+    - chat_id:
+      :source: chatId
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - created_by:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    :meta:
+      :table: enquiries
+      :extra_props: JSON
+
+
