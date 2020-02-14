@@ -19,6 +19,8 @@ COPY collections-agents.yml  /mosql/conf.d/
 COPY collections-org.yml  /mosql/conf.d/
 COPY collections-renters.yml  /mosql/conf.d/
 COPY collections-users.yml  /mosql/conf.d/
+COPY collections-enquiries.yml  /mosql/conf.d/
+COPY collections-chats.yml  /mosql/conf.d/
 
 RUN gem install awesome_print
 RUN gem install mosql-0.5.0.gem
