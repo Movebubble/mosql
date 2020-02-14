@@ -19,15 +19,3 @@ accountDB:
     :meta:
       :table: users
       :extra_props: JSON
-
-  userDeviceAppDetails:
-    :columns:
-    - id:
-      :source: _id
-      :type: CHARACTER VARYING
-    - user_id:
-      :source: userId
-      :type: CHARACTER VARYING
-    :meta:
-      :table: user_device_app_details
-      :extra_props: JSON
