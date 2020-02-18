@@ -159,9 +159,11 @@ module MoSQL
 
       metadata_table = MoSQL::Tailer.create_table(@sql.db, 'mosql_tailers')
 
+      log.warn("Initing Tailer")
       @tailer = MoSQL::Tailer.new([@mongo], :existing, metadata_table,
                                   :service => options[:service])
 
+      log.warn("Initing Streamer")
       @streamer = Streamer.new(:options => @options,
                                :tailer  => @tailer,
                                :mongo   => @mongo,
@@ -169,10 +171,12 @@ module MoSQL
                                :schema  => @schema)
 
       unless options[:skip_import]
+        log.warn("Initing Import")
         @streamer.import
       end
 
       unless options[:skip_tail]
+        log.warn("Initing Optail")
         @streamer.optail
       end
     end

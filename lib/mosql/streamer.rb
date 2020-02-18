@@ -168,9 +168,9 @@ module MoSQL
         if tail_from.is_a? Time
           tail_from = tailer.most_recent_position(tail_from)
         end
-        log.debug("staring to tail from: #{tail_from}")
+        log.warn("staring to tail from: #{tail_from}")
         tailer.tail(:from => tail_from, :filter => options[:oplog_filter])
-        log.debug("finished tailing #{tail_from}")
+        log.warn("finished tailing #{tail_from}")
         until @done
           log.debug("Starting to replicate tail operations on DB")
           tailer.stream(1000) do |op|
