@@ -1,0 +1,43 @@
+sourceDB:
+  sources:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - name:
+      :source: name
+      :type: CHARACTER VARYING
+    - type:
+      :source: type
+      :type: CHARACTER VARYING
+    - sub_type:
+      :source: subType
+      :type: CHARACTER VARYING
+    - active:
+      :source: active
+      :type: BOOLEAN
+    - deleted:
+      :source: deleted
+      :type: BOOLEAN
+    - create_update_schedule_at:
+      :source: createUpdateScheduleAt
+      :type: timestamp without time zone
+    - active_update_schedule_at:
+      :source: activeUpdateScheduleAt
+      :type: timestamp without time zone
+    - inactive_update_schedule_at:
+      :source: inactiveUpdateScheduleAt
+      :type: timestamp without time zone
+    - updated_at:
+      :source: updatedAt
+      :type: timestamp without time zone
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - created_by:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    :meta:
+      :table: sources
+
+

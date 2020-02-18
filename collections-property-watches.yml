@@ -1,0 +1,23 @@
+propertyDB:
+  propertyWatches:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - user_id:
+      :source: userId
+      :type: CHARACTER VARYING
+    - property_id:
+      :source: propertyId
+      :type: CHARACTER VARYING
+    - deleted:
+      :source: deleted
+      :type: BOOLEAN
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - deleted_at:
+      :source: deletedAt
+      :type: timestamp without time zone
+    :meta:
+      :table: property_watches

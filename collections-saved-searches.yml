@@ -1,0 +1,48 @@
+propertyDB:
+  renterSavedSearches:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - user_id:
+      :source: userId
+      :type: CHARACTER VARYING
+    - city_key:
+      :source: cityKey
+      :type: CHARACTER VARYING
+    - sort:
+      :source: sort
+      :type: CHARACTER VARYING
+    - basic_filters:
+      :source: basicFilters
+      :type: TEXT ARRAY
+      :array_type: TEXT ARRAY
+    - bedrooms:
+      :source: bedrooms
+      :type: INTEGER ARRAY
+      :array_type: INTEGER ARRAY
+    - bathrooms:
+      :source: bathrooms
+      :type: INTEGER ARRAY
+      :array_type: INTEGER ARRAY
+    - price_type:
+      :source: price.priceType
+      :type: CHARACTER VARYING
+    - price_from:
+      :source: price.priceFrom
+      :type: DECIMAL
+    - price_to:
+      :source: price.priceTo
+      :type: DECIMAL
+    - active:
+      :source: active
+      :type: BOOLEAN
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - updated_at:
+      :source: updatedAt
+      :type: timestamp without time zone
+    :meta:
+      :table: renter_searches
+      :extra_props: JSON
