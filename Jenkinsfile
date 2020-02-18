@@ -29,8 +29,21 @@ def stageEnvName    = 'stage'
 def prodEnvName     = 'prod'
 def awsRegion       = 'eu-west-2'
 def fileVersionName = 'VERSION.txt'
-def fileAppName     = 'APP-NAME.txt'
 
+def appsList = """
+${appName}-agents
+${appName}-org
+${appName}-renters
+${appName}-users
+${appName}-user-devices
+${appName}-analytics
+${appName}-enquiries
+${appName}-chats
+${appName}-properties
+${appName}-property-watches
+${appName}-saved-searches
+${appName}-sources
+"""
 
 properties([
   pipelineTriggers([githubPush()]),
@@ -83,8 +96,7 @@ pipeline {
         }
 
         writeFile file: fileVersionName, text: currentBuild.displayName
-        writeFile file: fileAppName, text: env.WEBAPP_NAME
-        stash name: 'app_and_version', includes: "${fileVersionName},${fileAppName}"
+        stash name: 'version', includes: "${fileVersionName}"
 
         dir("${infraDirName}") {
           git url: "${infraRepoName}", changelog: false, credentialsId: gitCredentialsId, poll: false
@@ -95,17 +107,16 @@ pipeline {
     stage('Build and Publish Docker Image') {
       agent any
       steps {
-        unstash "app_and_version"
+        unstash "version"
 
         script {
           def imageTag = readFile(fileVersionName).trim()
-          env.WEBAPP_NAME = readFile(fileAppName).trim()
 
           def dockerfilePrefixPath='.'
 
           docker.withRegistry(dockerRegistry, artifactoryCredId) {
             def image = docker.build(
-              "${env.WEBAPP_NAME}:${imageTag}",
+              "${appName}:${imageTag}",
               "-f ${dockerfilePrefixPath}/Dockerfile --pull ${dockerfilePrefixPath}"
             )
             image.push()
@@ -125,7 +136,7 @@ pipeline {
           registryUrl dockerRegistry
           registryCredentialsId artifactoryCredId
           args "-e WORKDIR=${infraDirName} \
-                -e WEBAPP_NAME=${env.WEBAPP_NAME} \
+                -e APP_LIST=\"${appsList}\" \
                 -e KUBE_CONTEXT=${stageEnvName} \
                 -e AWS_DEFAULT_REGION=${awsRegion} \
                 -e SOPS_PGP_FP=${sopsPgpFp} \
@@ -134,15 +145,14 @@ pipeline {
         }
       }
       steps {
-        unstash "app_and_version"
+        unstash "version"
 
         withCredentials([file(credentialsId: devopsGPGKeyCredId, variable: 'GPG_FILE'),
             usernamePassword(credentialsId: artifactoryCredId, passwordVariable: 'ARTIFACTORY_PASSWORD',
                              usernameVariable: 'ARTIFACTORY_USERNAME')]) {
-          withEnv(["THE_FILE_VERSION=${fileVersionName}", "THE_FILE_NAME=${fileAppName}"]) {
+          withEnv(["THE_FILE_VERSION=${fileVersionName}"]) {
             sh '''
               IMAGE_TAG="$(cat ${THE_FILE_VERSION})"
-              APP_NAME="$(cat $THE_FILE_NAME)"
 
               cd "${WORKDIR}/kubernetes"
 
@@ -154,7 +164,7 @@ pipeline {
               helm init --client-only
               helm repo add --username=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_PASSWORD} movebubble ${HELM_REPO_URL}
 
-              for APP in $APP_NAME ${APP_NAME}-agents ${APP_NAME}-org ${APP_NAME}-renters ${APP_NAME}-users ${APP_NAME}-user-devices ${APP_NAME}-analytics ${APP_NAME}-enquiries ${APP_NAME}-chats; do
+              for APP in $APP_LIST; do
                 helmfile \
                   -f helmfile/applications.yaml \
                   --state-values-set image.tag=${IMAGE_TAG} \
@@ -189,7 +199,7 @@ pipeline {
           registryUrl dockerRegistry
           registryCredentialsId artifactoryCredId
           args "-e WORKDIR=${infraDirName} \
-                -e WEBAPP_NAME=${env.WEBAPP_NAME} \
+                -e APP_LIST=\"${appsList}\" \
                 -e KUBE_CONTEXT=${prodEnvName} \
                 -e AWS_DEFAULT_REGION=${awsRegion} \
                 -e SOPS_PGP_FP=${sopsPgpFp} \
@@ -198,15 +208,14 @@ pipeline {
         }
       }
       steps {
-        unstash "app_and_version"
+        unstash "version"
 
         withCredentials([file(credentialsId: devopsGPGKeyCredId, variable: 'GPG_FILE'),
             usernamePassword(credentialsId: artifactoryCredId, passwordVariable: 'ARTIFACTORY_PASSWORD',
                              usernameVariable: 'ARTIFACTORY_USERNAME')]) {
-          withEnv(["THE_FILE_VERSION=${fileVersionName}", "THE_FILE_NAME=${fileAppName}"]) {
+          withEnv(["THE_FILE_VERSION=${fileVersionName}"]) {
             sh '''
               IMAGE_TAG="$(cat ${THE_FILE_VERSION})"
-              APP_NAME="$(cat $THE_FILE_NAME)"
 
               cd "${WORKDIR}/kubernetes"
 
@@ -218,7 +227,7 @@ pipeline {
               helm init --client-only
               helm repo add --username=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_PASSWORD} movebubble ${HELM_REPO_URL}
 
-              for APP in $APP_NAME ${APP_NAME}-agents ${APP_NAME}-org ${APP_NAME}-renters ${APP_NAME}-users ${APP_NAME}-user-devices ${APP_NAME}-analytics ${APP_NAME}-enquiries ${APP_NAME}-chats; do
+              for APP in $APP_LIST; do
                 helmfile \
                   -f helmfile/applications.yaml \
                   --state-values-set image.tag=${IMAGE_TAG} \
@@ -238,16 +247,15 @@ pipeline {
       node('') {
         script {
           try {
-            unstash 'app_and_version'
+            unstash 'version'
 
-            withEnv(["THE_FILE_VERSION=${fileVersionName}", "THE_FILE_NAME=${fileAppName}", "REGISTRY_HOST=${dockerRegistryHost}"]) {
+            withEnv(["THE_FILE_VERSION=${fileVersionName}", "APP_NAME=${appName}", "REGISTRY_HOST=${dockerRegistryHost}"]) {
               sh '''
                 IMAGE_TAG="$(cat ${THE_FILE_VERSION})"
-                WEBAPP_NAME="$(cat ${THE_FILE_NAME})"
 
                 # Delete images on Jenkins host
-                docker rmi ${WEBAPP_NAME}:${IMAGE_TAG} || echo "Nothing to delete"
-                docker rmi ${REGISTRY_HOST}/${WEBAPP_NAME}:${IMAGE_TAG} || echo "Nothing to delete"
+                docker rmi ${APP_NAME}:${IMAGE_TAG} || echo "Nothing to delete"
+                docker rmi ${REGISTRY_HOST}/${APP_NAME}:${IMAGE_TAG} || echo "Nothing to delete"
 
                 # Delete <none> images
                 # docker images --filter "dangling=true" -q | xargs docker rmi || echo "Nothing to delete"
