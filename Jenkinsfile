@@ -208,7 +208,7 @@ pipeline {
         }
       }
       steps {
-        unstash "app_and_version"
+        unstash "version"
 
         withCredentials([file(credentialsId: devopsGPGKeyCredId, variable: 'GPG_FILE'),
             usernamePassword(credentialsId: artifactoryCredId, passwordVariable: 'ARTIFACTORY_PASSWORD',
@@ -247,7 +247,7 @@ pipeline {
       node('') {
         script {
           try {
-            unstash 'app_and_version'
+            unstash 'version'
 
             withEnv(["THE_FILE_VERSION=${fileVersionName}", "APP_NAME=${appName}", "REGISTRY_HOST=${dockerRegistryHost}"]) {
               sh '''
