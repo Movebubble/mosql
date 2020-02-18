@@ -172,7 +172,7 @@ module MoSQL
         tailer.tail(:from => tail_from, :filter => options[:oplog_filter])
         log.warn("finished tailing #{tail_from}")
         until @done
-          log.debug("Starting to replicate tail operations on DB")
+          log.warn("Starting to replicate tail operations on DB")
           tailer.stream(1000) do |op|
             handle_op(op)
           end
@@ -191,7 +191,7 @@ module MoSQL
       end
   
       def handle_op(op)
-        log.debug("processing op: #{op.inspect}")
+        log.warn("processing op: #{op.inspect}")
         unless op['ns'] && op['op']
           log.warn("Weird op: #{op.inspect}")
           return
