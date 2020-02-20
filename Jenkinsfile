@@ -166,7 +166,7 @@ pipeline {
 
               for APP in $APP_LIST; do
                 helmfile \
-                  -f helmfile/applications.yaml \
+                  -f helmfile/etl.yaml \
                   --state-values-set image.tag=${IMAGE_TAG} \
                   -e $KUBE_CONTEXT \
                   -l app_name=$APP \
@@ -229,7 +229,7 @@ pipeline {
 
               for APP in $APP_LIST; do
                 helmfile \
-                  -f helmfile/applications.yaml \
+                  -f helmfile/etl.yaml \
                   --state-values-set image.tag=${IMAGE_TAG} \
                   -e $KUBE_CONTEXT \
                   -l app_name=$APP \
