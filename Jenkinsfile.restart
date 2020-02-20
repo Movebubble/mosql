@@ -31,8 +31,7 @@ stage
 prod
 '''
 
-def mosqlAppsList = '''
-mosql-agents
+def mosqlAppsList = '''mosql-agents
 mosql-analytics
 mosql-chats
 mosql-enquiries
@@ -43,8 +42,7 @@ mosql-renters
 mosql-saved-searches
 mosql-sources
 mosql-user-devices
-mosql-users
-'''
+mosql-users'''
 
 def appsList = """
 mosql
