@@ -1,0 +1,199 @@
+#!/usr/bin/env groovy
+
+@Library('jenkins-shared-library') _
+
+def dockerRegistryHost   = 'docker.artifactory.int.mgmt.movebubble.com'
+def dockerRegistry       = "https://${dockerRegistryHost}"
+def dockerRegistryCredId = 'docker-artifactory-credentials'
+def artifactoryCredId    = 'artifactory-credentials'
+
+def deployDockerImage    = "${dockerRegistryHost}/helmfile:v0.86.10"
+def helmRepoLocalUrl     = 'https://artifactory.int.mgmt.movebubble.com/artifactory/helm-local'
+def helmRepoUrl          = 'https://artifactory.int.mgmt.movebubble.com/artifactory/helm'
+
+def slackTeam            = 'Movebubble'
+def slackChannel         = '#dev-notifications'
+def slackTokenCredId     = 'slack-token'
+
+def repoName             = 'devops'
+def repoFullNameGit      = 'git@github.com:Movebubble/' + repoName + '.git'
+def gitCredentialsId     = 'jenkins-github'
+
+def infraDirName         = 'infrastructure'
+def infraRepoName        = 'git@github.com:Movebubble/infrastructure.git'
+def sopsPgpFp            = '3B762AAAD87FF916301898DCBD394F0FF50842CE'
+def devopsGPGKeyCredId   = 'devops-gpg-private-key-file'
+
+def awsRegion            = 'eu-west-2'
+
+def mosqlAppsList = '''
+mosql-agents
+mosql-analytics
+mosql-chats
+mosql-enquiries
+mosql-org
+mosql-properties
+mosql-property-watches
+mosql-renters
+mosql-saved-searches
+mosql-sources
+mosql-user-devices
+mosql-users
+'''
+
+def appsList = """
+mosql
+${mosqlAppsList}
+refresh-materialized-view
+"""
+
+
+pipeline {
+  // Run all stages on the same agent and the same workspace
+  // https://jenkins.io/blog/2018/07/02/whats-new-declarative-piepline-13x-sequential-stages/
+  agent none
+  stages {
+
+    stage('Update Job Parameters') {
+        agent any
+        steps {
+            script {
+                withFolderProperties {
+
+                    properties([
+                        disableConcurrentBuilds(),
+                        pipelineTriggers([]),
+                        parameters([
+                            choice(
+                              name: 'stack',
+                              choices: env.ENVIRONMENT.tokenize(),
+                              description: 'A list of environments is defined in Folder Properties.'
+                            ),
+                            choice(
+                              name: 'app_name',
+                              choices: appsList,
+                              description: 'Application to restart.'),
+                          booleanParam(
+                              name: 'reload_job',
+                              defaultValue: false,
+                              description: 'Reload job arguments without runing any MB actions.')
+                        ]),
+                    ])
+                }
+
+                if ( env.BUILD_NUMBER == "1" || params.reload_job ) {
+                  currentBuild.result = 'NOT_BUILT'
+                  env.CONTINUE_BUILD = 'false'
+                  return
+                }
+                env.CONTINUE_BUILD = 'true'
+            }
+        }
+    }
+
+    stage('Set Build Name') {
+      when { environment name: 'CONTINUE_BUILD', value: 'true' }
+      agent any
+      steps {
+        checkout([
+            $class: 'GitSCM',
+            branches: [[name: env.BRANCH_NAME]],
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [
+                [$class: 'CleanBeforeCheckout']
+            ],
+            submoduleCfg: [],
+            userRemoteConfigs: [[url: repoFullNameGit, credentialsId: gitCredentialsId]]
+        ])
+
+        script {
+          currentBuild.displayName = "[${params.stack}] ${params.app_name}"
+        }
+
+        dir("${infraDirName}") {
+          git url: "${infraRepoName}", changelog: false, credentialsId: gitCredentialsId, poll: false
+        }
+      }
+    }
+
+    stage('Reload Service') {
+      when { environment name: 'CONTINUE_BUILD', value: 'true' }
+      agent {
+        docker {
+          image deployDockerImage
+          registryUrl dockerRegistry
+          registryCredentialsId dockerRegistryCredId
+          args "-e WORKDIR=${infraDirName} \
+                -e KUBE_CONTEXT=${params.stack} \
+                -e AWS_DEFAULT_REGION=${awsRegion} \
+                -e HOME=/tmp \
+                -e APP_NAME=${params.app_name} \
+                -e SOPS_PGP_FP=${sopsPgpFp} \
+                -e HELM_REPO_URL=${helmRepoUrl} \
+                -e MOSQL_APPS_LIST=\"${mosqlAppsList}\""
+        }
+      }
+      steps {
+        withCredentials([file(credentialsId: devopsGPGKeyCredId, variable: 'GPG_FILE'),
+                usernamePassword(credentialsId: artifactoryCredId,
+                      passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USERNAME')]) {
+          sh '''
+            cd "${WORKDIR}/kubernetes"
+
+            aws eks update-kubeconfig --name $KUBE_CONTEXT --alias $KUBE_CONTEXT
+            kubectl config get-contexts
+
+            gpg --import $GPG_FILE
+
+            helm init --client-only
+            helm repo add --username=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_PASSWORD} movebubble ${HELM_REPO_URL}
+
+            if [ "mosql" = "$APP_NAME" ]; then
+              APP_NAME="${MOSQL_APPS_LIST}"
+            fi
+
+            echo "[INFO] Stop MoSQL jobs"
+            for APP in $APP_NAME; do
+              kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=0
+              kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
+            done
+
+            echo "[INFO] Reload MoSQL jobs configuration"
+            for APP in $APP_NAME; do
+              DEPLOY_IMAGE="$(kubectl get deploy -n etl $APP_NAME -o jsonpath="{.spec.template.spec.containers[0].image}")"
+              DEPLOY_IMAGE_REPO="${DEPLOY_IMAGE%:*}"
+              DEPLOY_IMAGE_TAG="${DEPLOY_IMAGE#*:}"
+              helmfile \
+                -f helmfile/etl.yaml \
+                -e $KUBE_CONTEXT \
+                -l app_name=$APP_NAME \
+                --state-values-set image.repository="${DEPLOY_IMAGE_REPO}",image.tag="${DEPLOY_IMAGE_TAG}" \
+                apply
+            done
+
+            echo "[INFO] Start MoSQL jobs"
+            for APP in $APP_NAME; do
+              kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=1
+              kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
+            done
+          '''
+        }
+      }
+    }
+  }
+
+  post {
+    always {
+      node('') {
+        script {
+          if (currentBuild.result == 'NOT_BUILT') {
+            echo "Skipping to send notification to Slack due to build result: ${currentBuild.result}"
+          } else if ( 'master' == env.BRANCH_NAME ) {
+            sendMessageToSlack(slackTeam, slackChannel, slackTokenCredId, currentBuild.result,
+                "[${currentBuild.result}] Reload app: ${currentBuild.displayName}")
+          }
+        }
+      }
+    }
+  }
+}
