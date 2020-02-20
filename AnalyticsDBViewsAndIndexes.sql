@@ -94,6 +94,7 @@ CREATE MATERIALIZED VIEW users_app_logins AS
  SELECT users_app_logins.id,
     users_app_logins.ac ->> 'organizationId'::text AS organization_id,
     users_app_logins.ac ->> 'unitId'::text AS unit_id,
+
     json_array_to_text_array(users_app_logins.ac -> 'appKeys'::text) AS app_keys,
     json_array_to_text_array(users_app_logins.ac -> 'userRoleIds'::text) AS user_role_ids,
     ( SELECT latest_status.status
@@ -182,122 +183,17 @@ REFRESH MATERIALIZED VIEW renter_search_filters;
 
 
 
+/* Refresh views */
+REFRESH MATERIALIZED VIEW units_packages;
+REFRESH MATERIALIZED VIEW users_app_logins;
+REFRESH MATERIALIZED VIEW renter_search_filters;
+REFRESH MATERIALIZED VIEW user_app_devices;
+REFRESH MATERIALIZED VIEW chat_messages_seen;
+REFRESH MATERIALIZED VIEW chat_messages_transmitted;
+REFRESH MATERIALIZED VIEW enquiries_interactions;
+REFRESH MATERIALIZED VIEW property_sources;
+REFRESH MATERIALIZED VIEW property_features;
 
-
-/* Triggers */
-
-DROP TRIGGER IF EXISTS refresh_units_packages_materialized_view_trigger ON units CASCADE;
-DROP TRIGGER IF EXISTS refresh_renter_srch_filters_materialized_view_trigger ON renter_searches CASCADE;
-DROP TRIGGER IF EXISTS refresh_user_app_devices_materialized_view_trigger ON user_device_app_details CASCADE;
-DROP TRIGGER IF EXISTS refresh_chat_messages_materialized_view_trigger ON chat_messages CASCADE;
-DROP TRIGGER IF EXISTS refresh_user_apps_logins_materialized_view_trigger ON users CASCADE;
-DROP TRIGGER IF EXISTS refresh_enquiries_interactions_materialized_view_trigger ON enquiries CASCADE;
-DROP TRIGGER IF EXISTS refresh_properties_materialized_view_trigger ON properties CASCADE; 
-
-CREATE OR REPLACE FUNCTION refresh_units_packages_materialized_view()
-  RETURNS TRIGGER LANGUAGE plpgsql
-  AS $$
-  BEGIN
-  REFRESH MATERIALIZED VIEW units_packages;
-  RETURN NULL;
-  END $$;
-
-
-CREATE TRIGGER refresh_units_packages_materialized_view_trigger
-  AFTER INSERT OR UPDATE OR DELETE OR TRUNCATE
-  ON units
-  FOR EACH STATEMENT
-  EXECUTE PROCEDURE refresh_units_packages_materialized_view();
-
-CREATE OR REPLACE FUNCTION refresh_renter_srch_filters_materialized_view()
-  RETURNS TRIGGER LANGUAGE plpgsql
-  AS $$
-  BEGIN
-  REFRESH MATERIALIZED VIEW renter_search_filters;
-  RETURN NULL;
-  END $$;
-
-
-CREATE TRIGGER refresh_renter_srch_filters_materialized_view_trigger
-  AFTER INSERT OR UPDATE OR DELETE OR TRUNCATE
-  ON renter_searches
-  FOR EACH STATEMENT
-  EXECUTE PROCEDURE refresh_renter_srch_filters_materialized_view();
-
-CREATE OR REPLACE FUNCTION refresh_user_app_devices_materialized_view()
-  RETURNS TRIGGER LANGUAGE plpgsql
-  AS $$
-  BEGIN
-  REFRESH MATERIALIZED VIEW user_app_devices;
-  RETURN NULL;
-  END $$;
-
-CREATE TRIGGER refresh_user_app_devices_materialized_view_trigger
-  AFTER INSERT OR UPDATE OR DELETE OR TRUNCATE
-  ON user_device_app_details
-  FOR EACH STATEMENT
-  EXECUTE PROCEDURE refresh_user_app_devices_materialized_view();
-
-
-CREATE OR REPLACE FUNCTION refresh_chat_messages_seen_transmitted_materialized_view()
-  RETURNS TRIGGER LANGUAGE plpgsql
-  AS $$
-  BEGIN
-  REFRESH MATERIALIZED VIEW chat_messages_seen;
-  REFRESH MATERIALIZED VIEW chat_messages_transmitted;
-  RETURN NULL;
-  END $$;
-
-CREATE TRIGGER refresh_chat_messages_materialized_view_trigger
-  AFTER INSERT OR UPDATE OR DELETE OR TRUNCATE
-  ON chat_messages
-  FOR EACH STATEMENT
-  EXECUTE PROCEDURE refresh_chat_messages_seen_transmitted_materialized_view();
-
-CREATE OR REPLACE FUNCTION refresh_user_apps_logins_materialized_view()
-  RETURNS TRIGGER LANGUAGE plpgsql
-  AS $$
-  BEGIN
-  REFRESH MATERIALIZED VIEW users_app_logins;
-  RETURN NULL;
-  END $$;
-
-CREATE TRIGGER refresh_user_apps_logins_materialized_view_trigger
-  AFTER INSERT OR UPDATE OR DELETE OR TRUNCATE
-  ON users
-  FOR EACH STATEMENT
-  EXECUTE PROCEDURE refresh_user_apps_logins_materialized_view();
-
-
-CREATE OR REPLACE FUNCTION refresh_enquiries_interactions_materialized_view()
-  RETURNS TRIGGER LANGUAGE plpgsql
-  AS $$
-  BEGIN
-  REFRESH MATERIALIZED VIEW enquiries_interactions;
-  RETURN NULL;
-  END $$;
-
-CREATE TRIGGER refresh_enquiries_interactions_materialized_view_trigger
-  AFTER INSERT OR UPDATE OR DELETE OR TRUNCATE
-  ON enquiries
-  FOR EACH STATEMENT
-  EXECUTE PROCEDURE refresh_enquiries_interactions_materialized_view();
-
-
-CREATE OR REPLACE FUNCTION refresh_properties_materialized_view()
-  RETURNS TRIGGER LANGUAGE plpgsql
-  AS $$
-  BEGIN
-  REFRESH MATERIALIZED VIEW property_sources;
-  REFRESH MATERIALIZED VIEW property_features;
-  RETURN NULL;
-  END $$;
-
-CREATE TRIGGER refresh_properties_materialized_view_trigger
-  AFTER INSERT OR UPDATE OR DELETE OR TRUNCATE
-  ON properties
-  FOR EACH STATEMENT
-  EXECUTE PROCEDURE refresh_properties_materialized_view();
 
 
 /* Indexes */
