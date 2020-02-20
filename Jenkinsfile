@@ -227,6 +227,13 @@ pipeline {
               helm init --client-only
               helm repo add --username=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_PASSWORD} movebubble ${HELM_REPO_URL}
 
+              echo "[INFO] Stop all MoSQL jobs"
+              for APP in $APP_LIST; do
+                kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=0
+                kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
+              done
+
+              echo "[INFO] Deploy MoSQL jobs"
               for APP in $APP_LIST; do
                 helmfile \
                   -f helmfile/etl.yaml \
@@ -234,6 +241,12 @@ pipeline {
                   -e $KUBE_CONTEXT \
                   -l app_name=$APP \
                   apply
+              done
+
+              echo "[INFO] Start all MoSQL jobs"
+              for APP in $APP_LIST; do
+                kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=1
+                kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
               done
             '''
           }
