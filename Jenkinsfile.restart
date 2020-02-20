@@ -26,6 +26,11 @@ def devopsGPGKeyCredId   = 'devops-gpg-private-key-file'
 
 def awsRegion            = 'eu-west-2'
 
+def envList = '''
+stage
+prod
+'''
+
 def mosqlAppsList = '''
 mosql-agents
 mosql-analytics
@@ -66,7 +71,7 @@ pipeline {
                         parameters([
                             choice(
                               name: 'stack',
-                              choices: env.ENVIRONMENT.tokenize(),
+                              choices: envList,
                               description: 'A list of environments is defined in Folder Properties.'
                             ),
                             choice(
