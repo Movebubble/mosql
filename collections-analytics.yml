@@ -79,3 +79,133 @@ analyticsDB:
     :meta:
       :table: app_installs
 
+
+  analyticsEvents:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - app_key:
+        :source: appKey
+        :type: CHARACTER VARYING
+      - unit_id:
+        :source: unitId
+        :type: CHARACTER VARYING
+      - organization_id:
+        :source: organizationId
+        :type: CHARACTER VARYING
+      - user_id:
+        :source: userId
+        :type: CHARACTER VARYING
+      - city_key:
+        :source: cityKey
+        :type: CHARACTER VARYING
+      - email:
+        :source: email
+        :type: CHARACTER VARYING
+      - app_version:
+        :source: appVersion
+        :type: CHARACTER VARYING
+      - type:
+        :source: type
+        :type: CHARACTER VARYING
+      - device_details_device_id:
+        :source: deviceDetails.deviceId
+        :type: CHARACTER VARYING
+      - device_details_platform_type:
+        :source: deviceDetails.platformType
+        :type: CHARACTER VARYING
+      - device_details_brand:
+        :source: deviceDetails.brand
+        :type: CHARACTER VARYING
+      - device_details_build_number:
+        :source: deviceDetails.buildNumber
+        :type: CHARACTER VARYING
+      - device_details_battery_level:
+        :source: deviceDetails.batteryLevel
+        :type: CHARACTER VARYING
+      - device_details_device_type:
+        :source: deviceDetails.deviceType
+        :type: CHARACTER VARYING
+      - device_details_manufacturer:
+        :source: deviceDetails.manufacturer
+        :type: CHARACTER VARYING
+      - device_details_version:
+        :source: deviceDetails.version
+        :type: CHARACTER VARYING
+      - device_details_system_name:
+        :source: deviceDetails.systemName
+        :type: CHARACTER VARYING
+      - device_details_system_version:
+        :source: deviceDetails.systemVersion
+        :type: CHARACTER VARYING
+      - device_details_device_unique_id:
+        :source: deviceDetails.deviceUniqueId
+        :type: CHARACTER VARYING
+      - device_details_used_memory:
+        :source: deviceDetails.usedMemory
+        :type: CHARACTER VARYING
+      - device_details_os_version:
+        :source: deviceDetails.osVersion
+        :type: CHARACTER VARYING
+      - device_details_locale:
+        :source: deviceDetails.locale
+        :type: CHARACTER VARYING
+      - device_details_pn_enabled:
+        :source: deviceDetails.pnEnabled
+        :type: BOOLEAN
+      - type_details_property_id:
+        :source: typeDetails.propertyId
+        :type: CHARACTER VARYING
+      - client_date_time:
+        :source: clientDateTime
+        :type: timestamp without time zone
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+      - tags:
+        :source: tags
+        :type: TEXT ARRAY
+        :array_type: TEXT ARRAY
+      - internet_connection_details_type:
+        :source: internetConnectionDetails.isFirstLaunch
+        :type: CHARACTER VARYING
+      - internet_connection_details_carrier:
+        :source: internetConnectionDetails.carrier
+        :type: CHARACTER VARYING
+      - internet_connection_details_cellular_generation:
+        :source: internetConnectionDetails.cellularGeneration
+        :type: CHARACTER VARYING
+      - web_env_details_client_id:
+        :source: webEnvDetails.clientId
+        :type: CHARACTER VARYING
+      - web_env_details_app_code_name:
+        :source: webEnvDetails.appCodeName
+        :type: CHARACTER VARYING
+      - web_env_details_app_name:
+        :source: webEnvDetails.appName
+        :type: CHARACTER VARYING
+      - web_env_details_app_version:
+        :source: webEnvDetails.appVersion
+        :type: CHARACTER VARYING
+      - web_env_details_cookie_enabled:
+        :source: webEnvDetails.cookieEnabled
+        :type: BOOLEAN
+      - web_env_details_languages:
+        :source: webEnvDetails.languages
+        :type: TEXT ARRAY
+        :array_type: TEXT ARRAY
+      - web_env_details_platform:
+        :source: webEnvDetails.platform
+        :type: CHARACTER VARYING
+      - web_env_details_product:
+        :source: webEnvDetails.product
+        :type: CHARACTER VARYING
+      - web_env_details_user_agent:
+        :source: webEnvDetails.userAgent
+        :type: CHARACTER VARYING
+      - web_env_details_vendor:
+        :source: webEnvDetails.vendor
+        :type: CHARACTER VARYING
+    :meta:
+      :table: analytics_events
