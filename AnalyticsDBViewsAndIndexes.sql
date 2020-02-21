@@ -240,3 +240,8 @@ CREATE INDEX acl_operation_and_subject_type_and_subject_id_idx ON acl (operation
 DROP INDEX IF EXISTS acl_operation_and_object_type_and_object_id_idx;
 CREATE INDEX acl_operation_and_object_type_and_object_id_idx ON acl (operation,object_type,object_id);
 
+DROP INDEX IF EXISTS analytics_events_type_and_user_id_idx;
+CREATE INDEX analytics_events_type_and_user_id_idx ON analytics_events (type,user_id);
+
+DROP INDEX IF EXISTS analytics_events_type_and_type_details_property_id_idx;
+CREATE INDEX analytics_events_type_and_type_details_property_id_idx ON analytics_events (type,type_details_property_id);
