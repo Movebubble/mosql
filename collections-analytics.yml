@@ -157,6 +157,12 @@ analyticsDB:
       - type_details_property_id:
         :source: typeDetails.propertyId
         :type: CHARACTER VARYING
+      - type_details_enquiry_id:
+        :source: typeDetails.enquiryId
+        :type: CHARACTER VARYING
+      - type_details_chat_id:
+        :source: typeDetails.chatId
+        :type: CHARACTER VARYING
       - client_date_time:
         :source: clientDateTime
         :type: timestamp without time zone
