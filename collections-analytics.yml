@@ -163,6 +163,9 @@ analyticsDB:
       - type_details_chat_id:
         :source: typeDetails.chatId
         :type: CHARACTER VARYING
+      - type_details_page_id:
+        :source: typeDetails.pageId
+        :type: CHARACTER VARYING
       - client_date_time:
         :source: clientDateTime
         :type: timestamp without time zone
