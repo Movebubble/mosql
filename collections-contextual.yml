@@ -1,0 +1,93 @@
+contextualConfigurationDB:
+  toggles:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - type:
+      :source: type
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - created_by_entity_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_by_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - entity_id:
+      :source: entity.id
+      :type: CHARACTER VARYING
+    - entity_type:
+      :source: entity.type
+      :type: CHARACTER VARYING
+    :meta:
+      :table: contextual_toggles
+
+
+  pages:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - page_id:
+      :source: pageId
+      :type: CHARACTER VARYING
+    - type:
+      :source: type
+      :type: CHARACTER VARYING
+    - created_by_entity_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_by_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - updated_by_entity_id:
+      :source: updatedBy.entityId
+      :type: CHARACTER VARYING
+    - updated_by_entity_type:
+      :source: updatedBy.entityType
+      :type: CHARACTER VARYING
+    - updated_at:
+      :source: updatedAt
+      :type: timestamp without time zone
+    - active:
+      :source: active
+      :type: BOOLEAN
+    - deleted:
+      :source: deleted
+      :type: BOOLEAN
+    - latest:
+      :source: latest
+      :type: BOOLEAN
+    - version:
+      :source: version
+      :type: INTEGER
+    - details_order_weight:
+      :source: details.orderWeight
+      :type: CHARACTER VARYING
+    - details_type:
+      :source: details.type
+      :type: CHARACTER VARYING
+    - details_community_id:
+      :source: details.communityId
+      :type: CHARACTER VARYING
+    - details_name:
+      :source: details.name
+      :type: CHARACTER VARYING
+    - details_title:
+      :source: details.title
+      :type: CHARACTER VARYING
+    - details_description:
+      :source: details.description
+      :type: CHARACTER VARYING
+    - details_image_full_size_url:
+      :source: details.image.fullSizeUrl
+      :type: CHARACTER VARYING
+    :meta:
+      :table: versioned_pages
+      :extra_props: JSON
