@@ -230,7 +230,7 @@ pipeline {
 
               echo "[INFO] Stop all MoSQL jobs"
               for APP in $APP_LIST; do
-                kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=0
+                kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=0 || continue
                 kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
               done
 
