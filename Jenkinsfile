@@ -32,17 +32,18 @@ def fileVersionName = 'VERSION.txt'
 
 def appsList = """
 ${appName}-agents
-${appName}-org
-${appName}-renters
-${appName}-users
-${appName}-user-devices
 ${appName}-analytics
-${appName}-enquiries
 ${appName}-chats
+${appName}-contextual
+${appName}-enquiries
+${appName}-org
 ${appName}-properties
 ${appName}-property-watches
+${appName}-renters
 ${appName}-saved-searches
 ${appName}-sources
+${appName}-user-devices
+${appName}-users
 """
 
 properties([
