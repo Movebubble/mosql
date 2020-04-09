@@ -166,6 +166,24 @@ analyticsDB:
       - type_details_page_id:
         :source: typeDetails.pageId
         :type: CHARACTER VARYING
+      - type_details_community_id:
+        :source: typeDetails.communityId
+        :type: CHARACTER VARYING
+      - type_details_video_id:
+        :source: typeDetails.videoId
+        :type: CHARACTER VARYING
+      - type_details_video_group_id:
+        :source: typeDetails.videoGroupId
+        :type: CHARACTER VARYING
+      - type_details_video_initial_loading_time_millis:
+        :source: typeDetails.initialLoadingTimeMillis
+        :type: BIGINT
+      - type_details_video_played_time_millis:
+        :source: typeDetails.playedTimeMillis
+        :type: BIGINT
+      - type_details_video_time_millis:
+        :source: typeDetails.videoTimeMillis
+        :type: BIGINT
       - client_date_time:
         :source: clientDateTime
         :type: timestamp without time zone
