@@ -1,0 +1,283 @@
+videoDB:
+  clipConfiguration:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - key:
+      :source: key
+      :type: CHARACTER VARYING
+    - type:
+      :source: type
+      :type: CHARACTER VARYING
+    - group_type:
+      :source: groupType
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - created_by_entity_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_by_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - tags:
+      :source: tags
+      :type: TEXT ARRAY
+      :array_type: TEXT ARRAY
+    - deleted:
+      :source: deleted
+      :type: BOOLEAN
+    - seconds_allowed:
+      :source: secondsAllowed
+      :type: INTEGER
+    - order:
+      :source: order
+      :type: INTEGER
+    - default_sound_settings_video_volume_level:
+      :source: defaultSoundSettings.videoVolumeLevel
+      :type: DECIMAL
+    - default_sound_settings_soundtrack_volume_level:
+      :source: defaultSoundSettings.soundtrackVolumeLevel
+      :type: DECIMAL
+    :meta:
+      :table: clip_configurations
+      :extra_props: JSON
+
+
+  videos:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - title:
+      :source: title
+      :type: CHARACTER VARYING
+    - video_group_id:
+      :source: videoGroupId
+      :type: CHARACTER VARYING
+    - order_weight:
+      :source: orderWeight
+      :type: INTEGER
+    - sound_settings_video_volume_level:
+      :source: soundSettings.videoVolumeLevel
+      :type: DECIMAL
+    - sound_settings_soundtrack_volume_level:
+      :source: soundSettings.soundtrackVolumeLevel
+      :type: DECIMAL
+    - details_type:
+      :source: details.type
+      :type: CHARACTER VARYING
+    - details_label:
+      :source: details.label
+      :type: CHARACTER VARYING
+    - original_url:
+      :source: originalUrl
+      :type: CHARACTER VARYING
+    - original_video_s3_path:
+      :source: originalVideoS3Path
+      :type: CHARACTER VARYING
+    - clip_config_key:
+      :source: clipConfigKey
+      :type: CHARACTER VARYING
+    - tags:
+      :source: tags
+      :type: TEXT ARRAY
+      :array_type: TEXT ARRAY
+    - processing_details_processed:
+      :source: processingDetails.processed
+      :type: CHARACTER VARYING
+    - processing_details_last_successfully_processed_at:
+      :source: processingDetails.lastSuccessfullyProcessedAt
+      :type: timestamp without time zone
+    - processing_details_last_scheduled_at:
+      :source: processingDetails.lastScheduledAt
+      :type: timestamp without time zone
+    - validation_details_validation_errors:
+      :source: validationDetails.validationError
+      :type: TEXT ARRAY
+      :array_type: TEXT ARRAY
+    - validation_details_meta_info:
+      :source: validationDetails.metaInfo
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - created_by_entity_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_by_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - updated_at:
+      :source: updatedAt
+      :type: timestamp without time zone
+    - updated_by_entity_id:
+      :source: updatedBy.entityId
+      :type: CHARACTER VARYING
+    - updated_by_entity_type:
+      :source: updatedBy.entityType
+      :type: CHARACTER VARYING
+    - deleted:
+      :source: deleted
+      :type: BOOLEAN
+    - valid:
+      :source: valid
+      :type: BOOLEAN
+    - duration_in_ms:
+      :source: durationInMs
+      :type: BIGINT
+    - streaming_url:
+      :source: streamingUrl
+      :type: CHARACTER VARYING
+    - preview_boomerang_original_url:
+      :source: previewBoomerang.originalUrl
+      :type: CHARACTER VARYING
+    - preview_boomerang_mobile_size_url:
+      :source: previewBoomerang.mobileSizeUrl
+      :type: CHARACTER VARYING
+    - preview_boomerang_small_mobile_size_url:
+      :source: previewBoomerang.smallMobileSizeUrl
+      :type: CHARACTER VARYING
+    - preview_image_original_url:
+      :source: previewImage.originalUrl
+      :type: CHARACTER VARYING
+    - preview_image_mobile_size_url:
+      :source: previewImage.mobileSizeUrl
+      :type: CHARACTER VARYING
+    - preview_image_small_mobile_size_url:
+      :source: previewImage.smallMobileSizeUrl
+      :type: CHARACTER VARYING
+    :meta:
+      :table: videos
+      :extra_props: JSON
+
+
+  videoGroup:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - details_type:
+        :source: details.type
+        :type: CHARACTER VARYING
+      - details_property_id:
+        :source: details.propertyId
+        :type: CHARACTER VARYING
+      - details_property_preview_video_id:
+        :source: details.propertyPreviewVideo.videoId
+        :type: CHARACTER VARYING
+      - details_community_id:
+        :source: details.communityId
+        :type: CHARACTER VARYING
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+      - created_by_entity_id:
+        :source: createdBy.entityId
+        :type: CHARACTER VARYING
+      - created_by_entity_type:
+        :source: createdBy.entityType
+        :type: CHARACTER VARYING
+      - updated_at:
+        :source: updatedAt
+        :type: timestamp without time zone
+      - updated_by_entity_id:
+        :source: updatedBy.entityId
+        :type: CHARACTER VARYING
+      - updated_by_entity_type:
+        :source: updatedBy.entityType
+        :type: CHARACTER VARYING
+      - indexed_at:
+        :source: indexedAt
+        :type: timestamp without time zone
+      - deleted:
+        :source: deleted
+        :type: BOOLEAN
+      - valid:
+        :source: valid
+        :type: BOOLEAN
+      - approved:
+        :source: approved
+        :type: BOOLEAN
+    :meta:
+      :table: video_groups
+      :extra_props: JSON
+
+
+videoProcessingDB:
+  videoProcessingRuns:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - type:
+        :source: type
+        :type: CHARACTER VARYING
+      - video_id:
+        :source: videoId
+        :type: CHARACTER VARYING
+      - video_group_id:
+        :source: videoGroupId
+        :type: CHARACTER VARYING
+      - priority:
+        :source: priority
+        :type: INTEGER
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+      - updated_at:
+        :source: updatedAt
+        :type: timestamp without time zone
+      - completed_at:
+        :source: completedAt
+        :type: timestamp without time zone
+      - error_details_error_description:
+        :source: errorDetails.errorDescription
+        :type: CHARACTER VARYING
+      - error_details_error_occurred_at:
+        :source: errorDetails.errorOccurredAt
+        :type: timestamp without time zone
+      - details_video_convert_processing_run_id:
+        :source: details.videoConvertProcessingRunId
+        :type: CHARACTER VARYING
+      - details_preview_image_original_url:
+        :source: details.previewImage.originalUrl
+        :type: CHARACTER VARYING
+      - details_preview_image_mobile_size_url:
+        :source: details.previewImage.mobileSizeUrl
+        :type: CHARACTER VARYING
+      - details_preview_image_small_mobile_size_url:
+        :source: details.previewImage.smallMobileSizeUrl
+        :type: CHARACTER VARYING
+      - details_preview_boomerang_original_url:
+        :source: details.previewBoomerang.originalUrl
+        :type: CHARACTER VARYING
+      - details_preview_boomerang_mobile_size_url:
+        :source: details.previewBoomerang.mobileSizeUrl
+        :type: CHARACTER VARYING
+      - details_preview_boomerang_small_mobile_size_url:
+        :source: details.previewBoomerang.smallMobileSizeUrl
+        :type: CHARACTER VARYING
+      - details_original_video_s3_path:
+        :source: details.originalVideoS3Path
+        :type: CHARACTER VARYING
+      - details_job_id:
+        :source: details.jobId
+        :type: CHARACTER VARYING
+      - details_create_job_request_details:
+        :source: details.createJobRequestDetails
+        :type: CHARACTER VARYING
+      - details_create_job_request_result_details:
+        :source: details.createJobRequestResultDetails
+        :type: CHARACTER VARYING
+      - details_video_details_streaming_video_s3_path:
+        :source: details.videoDetails.streamingVideoS3Path
+        :type: CHARACTER VARYING
+      - details_video_details_duration_in_ms:
+        :source: details.videoDetails.durationInMs
+        :type: CHARACTER VARYING
+    :meta:
+      :table: video_processing_runs
+      :extra_props: JSON
