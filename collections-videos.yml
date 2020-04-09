@@ -87,7 +87,7 @@ videoDB:
       :array_type: TEXT ARRAY
     - processing_details_processed:
       :source: processingDetails.processed
-      :type: CHARACTER VARYING
+      :type: BOOLEAN
     - processing_details_last_successfully_processed_at:
       :source: processingDetails.lastSuccessfullyProcessedAt
       :type: timestamp without time zone
@@ -154,7 +154,7 @@ videoDB:
       :extra_props: JSON
 
 
-  videoGroup:
+  videoGroups:
     :columns:
       - id:
         :source: _id
