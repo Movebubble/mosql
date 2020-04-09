@@ -36,6 +36,7 @@ ${appName}-analytics
 ${appName}-chats
 ${appName}-contextual
 ${appName}-enquiries
+${appName}-videos
 ${appName}-org
 ${appName}-properties
 ${appName}-property-watches

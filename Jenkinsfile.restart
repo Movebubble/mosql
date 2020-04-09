@@ -35,6 +35,7 @@ def mosqlAppsList = '''mosql-agents
 mosql-analytics
 mosql-chats
 mosql-enquiries
+mosql-videos
 mosql-org
 mosql-properties
 mosql-property-watches
