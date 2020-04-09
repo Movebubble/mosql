@@ -55,6 +55,9 @@ propertyDB:
     - property_type:
       :source: details.propertyType.propertyType
       :type: CHARACTER VARYING
+    - has_approved_walkthrough:
+      :source: details.hasWalkthroughs
+      :type: BOOLEAN
     - price_per_month:
       :source: finance.pricePerMonth
       :type: DECIMAL
