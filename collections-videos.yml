@@ -280,7 +280,7 @@ videoProcessingDB:
         :type: CHARACTER VARYING
       - details_video_details_duration_in_ms:
         :source: details.videoDetails.durationInMs
-        :type: CHARACTER VARYING
+        :type: BIGINT
     :meta:
       :table: video_processing_runs
       :extra_props: JSON
