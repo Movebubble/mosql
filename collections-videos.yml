@@ -1,5 +1,5 @@
 videoDB:
-  clipConfiguration:
+  clipConfigurations:
     :columns:
     - id:
       :source: _id
@@ -34,6 +34,9 @@ videoDB:
       :type: INTEGER
     - order:
       :source: order
+      :type: INTEGER
+    - search_order:
+      :source: searchOrder
       :type: INTEGER
     - default_sound_settings_video_volume_level:
       :source: defaultSoundSettings.videoVolumeLevel
