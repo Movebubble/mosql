@@ -245,3 +245,33 @@ CREATE INDEX analytics_events_type_and_user_id_idx ON analytics_events (type,use
 
 DROP INDEX IF EXISTS analytics_events_type_and_type_details_property_id_idx;
 CREATE INDEX analytics_events_type_and_type_details_property_id_idx ON analytics_events (type,type_details_property_id);
+
+DROP INDEX IF EXISTS videos_video_group_id_idx;
+CREATE INDEX videos_video_group_id_idx ON videos (video_group_id);
+
+DROP INDEX IF EXISTS videos_clip_config_key_idx;
+CREATE INDEX videos_clip_config_key_idx ON videos (clip_config_key);
+
+DROP INDEX IF EXISTS video_groups_details_property_id_idx;
+CREATE INDEX video_groups_details_property_id_idx ON video_groups (details_property_id);
+
+DROP INDEX IF EXISTS video_groups_details_community_id_idx;
+CREATE INDEX video_groups_details_community_id_idx ON video_groups (details_community_id);
+
+DROP INDEX IF EXISTS clip_configurations_key_idx;
+CREATE INDEX clip_configurations_key_idx ON clip_configurations (key);
+
+DROP INDEX IF EXISTS clip_configurations_type_idx;
+CREATE INDEX clip_configurations_type_idx ON clip_configurations (type);
+
+DROP INDEX IF EXISTS clip_configurations_key_type_idx;
+CREATE INDEX clip_configurations_key_type_idx ON clip_configurations (key,type);
+
+DROP INDEX IF EXISTS video_processing_runs_type_idx;
+CREATE INDEX video_processing_runs_type_idx ON video_processing_runs (type);
+
+DROP INDEX IF EXISTS video_processing_runs_video_id_idx;
+CREATE INDEX video_processing_runs_video_id_idx ON video_processing_runs (video_id);
+
+DROP INDEX IF EXISTS video_processing_runs_video_group_id_idx;
+CREATE INDEX video_processing_runs_video_group_id_idx ON video_processing_runs (video_group_id);
