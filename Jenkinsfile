@@ -45,6 +45,7 @@ ${appName}-saved-searches
 ${appName}-sources
 ${appName}-user-devices
 ${appName}-users
+${appName}-feedbacks
 """
 
 properties([
