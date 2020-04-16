@@ -31,6 +31,12 @@ feedbackDB:
     - origin_type:
       :source: originType
       :type: CHARACTER VARYING
+    - origin_unit_id:
+      :source: origin.unitId
+      :type: CHARACTER VARYING
+    - origin_chat_id:
+      :source: origin.chatId
+      :type: CHARACTER VARYING
     :meta:
       :table: feedbacks
       :extra_props: JSON
