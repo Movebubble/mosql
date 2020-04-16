@@ -43,7 +43,8 @@ mosql-renters
 mosql-saved-searches
 mosql-sources
 mosql-user-devices
-mosql-users'''
+mosql-users
+mosql-feedbacks'''
 
 def appsList = """
 mosql

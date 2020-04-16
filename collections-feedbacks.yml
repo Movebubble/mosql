@@ -1,0 +1,38 @@
+feedbackDB:
+  feedbacks:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - given_by_entity_id:
+      :source: givenBy.entityId
+      :type: CHARACTER VARYING
+    - given_by_entity_type:
+      :source: givenBy.entityType
+      :type: CHARACTER VARYING
+    - target_entity_id:
+      :source: target.entityId
+      :type: CHARACTER VARYING
+    - target_entity_type:
+      :source: target.entityType
+      :type: CHARACTER VARYING
+    - review_type:
+      :source: reviewType
+      :type: CHARACTER VARYING
+    - review_comment:
+      :source: review.comment
+      :type: CHARACTER VARYING
+    - review_score:
+      :source: review.score
+      :type: DECIMAL
+    - origin_type:
+      :source: originType
+      :type: CHARACTER VARYING
+    :meta:
+      :table: feedbacks
+      :extra_props: JSON
+
+
