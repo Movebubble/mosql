@@ -165,13 +165,13 @@ pipeline {
 
             echo "[INFO] Reload MoSQL jobs configuration"
             for APP in $APP_NAME; do
-              DEPLOY_IMAGE="$(kubectl get deploy -n etl $APP_NAME -o jsonpath="{.spec.template.spec.containers[0].image}")"
+              DEPLOY_IMAGE="$(kubectl get deploy -n etl $APP -o jsonpath="{.spec.template.spec.containers[0].image}")"
               DEPLOY_IMAGE_REPO="${DEPLOY_IMAGE%:*}"
               DEPLOY_IMAGE_TAG="${DEPLOY_IMAGE#*:}"
               helmfile \
                 -f helmfile/etl.yaml \
                 -e $KUBE_CONTEXT \
-                -l app_name=$APP_NAME \
+                -l app_name=$APP \
                 --state-values-set image.repository="${DEPLOY_IMAGE_REPO}",image.tag="${DEPLOY_IMAGE_TAG}" \
                 apply
             done
