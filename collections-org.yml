@@ -74,6 +74,12 @@ accountDB:
     - hidden:
       :source: searchProductDetails.hidden
       :type: BOOLEAN
+    - success_fee_type:
+      :source: searchProductDetails.successFee.type
+      :type: CHARACTER VARYING
+    - success_fee_amount:
+      :source: searchProductDetails.successFee.amount
+      :type: DECIMAL
     :meta:
       :table: units
       :extra_props: JSON
