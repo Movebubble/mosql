@@ -100,9 +100,6 @@ analyticsDB:
       - city_key:
         :source: cityKey
         :type: CHARACTER VARYING
-      - email:
-        :source: email
-        :type: CHARACTER VARYING
       - app_version:
         :source: appVersion
         :type: CHARACTER VARYING
@@ -184,6 +181,51 @@ analyticsDB:
       - type_details_video_time_millis:
         :source: typeDetails.videoTimeMillis
         :type: BIGINT
+      - type_details_related_unit_package_id:
+        :source: typeDetails.relatedUnitPackageId
+        :type: CHARACTER VARYING
+      - type_details_view_context_is_pn_open:
+        :source: typeDetails.viewContextIsPnOpen
+        :type: BOOLEAN
+      - type_details_related_unit_id:
+        :source: typeDetails.relatedUnitId
+        :type: CHARACTER VARYING
+      - type_details_related_org_id:
+        :source: typeDetails.relatedOrgId
+        :type: CHARACTER VARYING
+      - type_details_has_walkthrough:
+        :source: typeDetails.hasWalkthrough
+        :type: BOOLEAN
+      - type_details_view_context_related_screen:
+        :source: typeDetails.viewContextRelatedScreen
+        :type: CHARACTER VARYING
+      - type_details_property_list_key:
+        :source: typeDetails.propertyListKey
+        :type: CHARACTER VARYING
+      - type_details_enquiry_interaction_type:
+        :source: typeDetails.enquiryInteractionType
+        :type: CHARACTER VARYING
+      - type_details_search_trace_id:
+        :source: typeDetails.searchTraceId
+        :type: CHARACTER VARYING
+      - type_details_search_results_total:
+        :source: typeDetails.searchResultsTotal
+        :type: BIGINT
+      - type_details_search_pagination_from:
+        :source: typeDetails.searchPaginationFrom
+        :type: BIGINT
+      - type_details_search_pagination_to:
+        :source: typeDetails.searchPaginationTo
+        :type: BIGINT
+      - type_details_related_user_id:
+        :source: typeDetails.relatedUserId
+        :type: CHARACTER VARYING
+      - type_details_pn_type:
+        :source: typeDetails.pnType
+        :type: CHARACTER VARYING
+      - type_details_pn_id:
+        :source: typeDetails.pnId
+        :type: CHARACTER VARYING
       - client_date_time:
         :source: clientDateTime
         :type: timestamp without time zone
