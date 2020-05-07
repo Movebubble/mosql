@@ -7,78 +7,119 @@ propertyDB:
     - system_type:
       :source: systemType
       :type: CHARACTER VARYING
-    - city_key:
+    - location_city_key:
       :source: location.cityKey
       :type: CHARACTER VARYING
-    - address:
+    - location_address:
       :source: location.address
       :type: CHARACTER VARYING
-    - country_key:
+    - location_country_key:
       :source: location.countryKey
       :type: CHARACTER VARYING
-    - postcode:
+    - location_postcode:
       :source: location.postcode
       :type: CHARACTER VARYING
-    - url:
+    - location_area:
+      :source: location.area
+      :type: CHARACTER VARYING
+    - location_is_in_searchable_area:
+      :source: location.isInSearchableArea
+      :type: BOOLEAN
+    - location_longitude:
+      :source: location.longitude
+      :type: DECIMAL
+    - location_latitude:
+      :source: location.latitude
+      :type: DECIMAL
+    - system_type_specific_details_url:
       :source: systemTypeSpecificDetails.url
       :type: CHARACTER VARYING
-    - external_id:
+    - system_type_specific_details_external_id:
       :source: systemTypeSpecificDetails.externalId
       :type: CHARACTER VARYING
-    - community_id:
+    - system_type_specific_details_community_id:
       :source: systemTypeSpecificDetails.communityId
       :type: CHARACTER VARYING
-    - title:
+    - system_type_specific_details_property_external_ids:
+      :source: systemTypeSpecificDetails.propertyExternalIds
+      :type: TEXT ARRAY
+      :array_type: TEXT ARRAY
+    - system_type_specific_details_available_properties_count:
+      :source: systemTypeSpecificDetails.availablePropertiesCount
+      :type: INTEGER
+    - details_title:
       :source: details.title
       :type: CHARACTER VARYING
-    - bedrooms:
+    - details_description:
+      :source: details.description
+      :type: CHARACTER VARYING
+    - details_bedrooms:
       :source: details.bedrooms
       :type: INTEGER
-    - bathrooms:
+    - details_bathrooms:
       :source: details.bathrooms
       :type: INTEGER
-    - floorNumber:
+    - details_floor_number:
       :source: details.floorNumber
       :type: INTEGER
-    - furnishing_type:
+    - details_apartment_number:
+      :source: details.apartmentNumber
+      :type: INTEGER
+    - details_furnishing_type:
       :source: details.furnishingType
       :type: CHARACTER VARYING
-    - sharing:
+    - details_sharing_sharing_type:
       :source: details.sharing.sharingType
       :type: CHARACTER VARYING
-    - space_type:
+    - details_space_space_type:
       :source: details.space.spaceType
       :type: CHARACTER VARYING
-    - space_amount:
+    - details_space_space_amount:
       :source: details.space.amount
       :type: DECIMAL
-    - property_type:
+    - details_property_type_property_type:
       :source: details.propertyType.propertyType
       :type: CHARACTER VARYING
-    - has_approved_walkthrough:
+    - details_has_approved_walkthrough:
       :source: details.hasWalkthroughs
       :type: BOOLEAN
-    - price_per_month:
+    - details_walkthroughs_approval_changed_at:
+      :source: details.walkthroughsApprovalChangedAt
+      :type: timestamp without time zone
+    - finance_price_per_month:
       :source: finance.pricePerMonth
       :type: DECIMAL
-    - price_per_week:
+    - finance_price_per_week:
       :source: finance.pricePerWeek
       :type: DECIMAL
-    - currency:
+    - finance_currency:
       :source: finance.currency
       :type: CHARACTER VARYING
-    - organization_id:
+    - advertizer_organization_id:
       :source: advertiser.organizationId
       :type: CHARACTER VARYING
-    - unit_id:
+    - advertizer_unit_id:
       :source: advertiser.unitId
       :type: CHARACTER VARYING
-    - areas_exact:
+    - advertizer_contact_details_present:
+      :source: advertiser.contactDetailsPresent
+      :type: BOOLEAN
+    - advertizer_is_test:
+      :source: advertiser.isTest
+      :type: BOOLEAN
+    - advertizer_is_hidden:
+      :source: advertiser.isHidden
+      :type: BOOLEAN
+    - areas_exact_matching_areas:
       :source: areas.exactMatchingAreas
       :type: TEXT ARRAY
       :array_type: TEXT ARRAY
-    - areas_fuzzy:
+    - areas_fuzzy_matching_areas:
       :source: areas.fuzzyMatchingAreas
+      :type: TEXT ARRAY
+      :array_type: TEXT ARRAY
+    - areas_promoted_areas:
+      :source: areas.promotedAreas
       :type: TEXT ARRAY
       :array_type: TEXT ARRAY
     - refreshed_at:
@@ -90,6 +131,24 @@ propertyDB:
     - updated_at:
       :source: updatedAt
       :type: timestamp without time zone
+    - available_at:
+      :source: availableAt
+      :type: timestamp without time zone
+    - indexed_at:
+      :source: indexedAt
+      :type: timestamp without time zone
+    - created_by_entity_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_by_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - updated_by_entity_id:
+      :source: updatedBy.entityId
+      :type: CHARACTER VARYING
+    - updated_by_entity_type:
+      :source: updatedBy.entityType
+      :type: CHARACTER VARYING
     - deleted:
       :source: deleted
       :type: BOOLEAN
@@ -99,11 +158,14 @@ propertyDB:
     - state_descritption:
       :source: stateDescription
       :type: CHARACTER VARYING
-    - watches_count:
+    - activity_watches_count:
       :source: activity.watchesCount
       :type: BIGINT
-    - enquries_count:
+    - activity_enquries_count:
       :source: activity.enquriesCount
+      :type: BIGINT
+    - unit_package_priority:
+      :source: unitPackagePriority
       :type: BIGINT
     :meta:
       :table: properties
