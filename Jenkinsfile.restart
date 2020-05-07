@@ -45,6 +45,11 @@ mosql-sources
 mosql-user-devices
 mosql-users
 mosql-feedbacks
+mosql-communities
+mosql-location
+mosql-notifications
+mosql-properties-areas
+mosql-reports
 mosql-contextual'''
 
 def appsList = """

@@ -46,6 +46,11 @@ ${appName}-sources
 ${appName}-user-devices
 ${appName}-users
 ${appName}-feedbacks
+${appName}-communities
+${appName}-location
+${appName}-notifications
+${appName}-properties-areas
+${appName}-reports
 """
 
 properties([
