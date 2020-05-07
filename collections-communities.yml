@@ -1,0 +1,80 @@
+communityDB:
+  communities:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - name:
+      :source: name
+      :type: CHARACTER VARYING
+    - type:
+      :source: type
+      :type: CHARACTER VARYING
+    - type_specific_details_btr_provider_name:
+      :source: typeSpecificDetails.btrProviderName
+      :type: CHARACTER VARYING
+    - type_specific_details_promoted_areas:
+      :source: typeSpecificDetails.promotedAreas
+      :type: TEXT ARRAY
+      :array_type: TEXT ARRAY
+    - active:
+      :source: active
+      :type: BOOLEAN
+    - advertizer_ogranization_id:
+      :source: advertizer.organizationId
+      :type: CHARACTER VARYING
+    - advertizer_unit_id:
+      :source: advertizer.unitId
+      :type: CHARACTER VARYING
+    - created_by_entity_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_by_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - updated_by_entity_id:
+      :source: updatedBy.entityId
+      :type: CHARACTER VARYING
+    - updated_by_entity_type:
+      :source: updatedBy.entityType
+      :type: CHARACTER VARYING
+    - updated_at:
+      :source: updatedAt
+      :type: timestamp without time zone
+    - deleted:
+      :source: deleted
+      :type: BOOLEAN
+    - location_country_key:
+      :source: location.countryKey
+      :type: CHARACTER VARYING
+    - location_city_key:
+      :source: location.cityKey
+      :type: CHARACTER VARYING
+    - location_area:
+      :source: location.area
+      :type: CHARACTER VARYING
+    - location_postcode:
+      :source: location.postcode
+      :type: CHARACTER VARYING
+    - location_address:
+      :source: location.address
+      :type: CHARACTER VARYING
+    - location_longitude:
+      :source: location.longitude
+      :type: DECIMAL
+    - location_latitude:
+      :source: location.latitude
+      :type: DECIMAL
+    - features:
+      :source: features
+      :type: TEXT ARRAY
+      :array_type: TEXT ARRAY
+    - indexed_at:
+      :source: indexedAt
+      :type: timestamp without time zone
+    :meta:
+      :table: communities
+      :extra_props: JSON

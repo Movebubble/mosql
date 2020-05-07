@@ -1,0 +1,67 @@
+locationDB:
+  transportStations:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - city_key:
+      :source: cityKey
+      :type: CHARACTER VARYING
+    - key:
+      :source: key
+      :type: CHARACTER VARYING
+    - location_latitude:
+      :source: location.latitude
+      :type: DECIMAL
+    - location_longitude:
+      :source: location.longitude
+      :type: DECIMAL
+    - name:
+      :source: name
+      :type: CHARACTER VARYING
+    - transport_type:
+      :source: transportType
+      :type: CHARACTER VARYING
+    - created_by_entity_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_by_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - indexed_at:
+      :source: indexedAt
+      :type: timestamp without time zone
+    :meta:
+      :table: transport_stations
+      :extra_props: JSON
+
+
+  transportLines:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - deleted:
+        :source: deleted
+        :type: BOOLEAN
+      - name:
+        :source: name
+        :type: CHARACTER VARYING
+      - transport_type:
+        :source: transportType
+        :type: CHARACTER VARYING
+      - created_by_entity_id:
+        :source: createdBy.entityId
+        :type: CHARACTER VARYING
+      - created_by_entity_type:
+        :source: createdBy.entityType
+        :type: CHARACTER VARYING
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+    :meta:
+      :table: transport_lines
+      :extra_props: JSON

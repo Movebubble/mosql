@@ -1,0 +1,77 @@
+propertyDB:
+  areas:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - deleted:
+      :source: deleted
+      :type: BOOLEAN
+    - created_by_entity_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_by_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - name:
+      :source: name
+      :type: CHARACTER VARYING
+    - key:
+      :source: key
+      :type: CHARACTER VARYING
+    - active:
+      :source: active
+      :type: BOOLEAN
+    - exact_well_known_text:
+      :source: exactWellKnownText
+      :type: CHARACTER VARYING
+    - fuzzy_well_known_text:
+      :source: fuzzyWellKnownText
+      :type: CHARACTER VARYING
+    - city_key:
+      :source: cityKey
+      :type: CHARACTER VARYING
+    - out_codes:
+      :source: outCodes
+      :type: TEXT ARRAY
+      :array_type: TEXT ARRAY
+    :meta:
+      :table: areas
+      :extra_props: JSON
+
+
+  searchLimits:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - active:
+        :source: active
+        :type: BOOLEAN
+      - city_key:
+        :source: cityKey
+        :type: CHARACTER VARYING
+      - created_by_entity_id:
+        :source: createdBy.entityId
+        :type: CHARACTER VARYING
+      - created_by_entity_type:
+        :source: createdBy.entityType
+        :type: CHARACTER VARYING
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+      - name:
+        :source: name
+        :type: CHARACTER VARYING
+      - description:
+        :source: description
+        :type: CHARACTER VARYING
+      - wkt_polygon:
+        :source: wktPolygon
+        :type: CHARACTER VARYING
+    :meta:
+      :table: search_limits
+      :extra_props: JSON

@@ -1,0 +1,82 @@
+notificationDB:
+  pushNotifications:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - to_device_id:
+      :source: toDeviceId
+      :type: CHARACTER VARYING
+    - registration_token:
+      :source: registrationToken
+      :type: CHARACTER VARYING
+    - sender_id:
+      :source: senderId
+      :type: CHARACTER VARYING
+    - message_title:
+      :source: messageTitle
+      :type: CHARACTER VARYING
+    - message_text:
+      :source: messageText
+      :type: CHARACTER VARYING
+    - message_id:
+      :source: messageId
+      :type: CHARACTER VARYING
+    - error_code:
+      :source: errorCode
+      :type: CHARACTER VARYING
+    - custom_data_map_data:
+      :source: customDataMap.data
+      :type: CHARACTER VARYING
+    - custom_data_map_pn_id:
+      :source: customDataMap.pnId
+      :type: CHARACTER VARYING
+    - created_by_entity_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_by_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    :meta:
+      :table: push_notifications
+      :extra_props: JSON
+
+
+  emailNotifications:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - sendgrid_id:
+        :source: sendGridId
+        :type: CHARACTER VARYING
+      - subject:
+        :source: subject
+        :type: CHARACTER VARYING
+      - sender_email:
+        :source: senderEmail
+        :type: CHARACTER VARYING
+      - recipient_email:
+        :source: recipientEmail
+        :type: CHARACTER VARYING
+      - content:
+        :source: content
+        :type: CHARACTER VARYING
+      - user_id:
+        :source: userId
+        :type: CHARACTER VARYING
+      - created_by_entity_id:
+        :source: createdBy.entityId
+        :type: CHARACTER VARYING
+      - created_by_entity_type:
+        :source: createdBy.entityType
+        :type: CHARACTER VARYING
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+    :meta:
+      :table: email_notifications
+      :extra_props: JSON

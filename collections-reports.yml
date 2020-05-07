@@ -1,0 +1,189 @@
+reportDB:
+  reports:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - created_by_entity_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_by_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - updated_by_entity_id:
+      :source: updatedBy.entityId
+      :type: CHARACTER VARYING
+    - updated_by_entity_type:
+      :source: updatedBy.entityType
+      :type: CHARACTER VARYING
+    - updated_at:
+      :source: updatedAt
+      :type: timestamp without time zone
+    - last_scheduled_by_entity_id:
+      :source: lastScheduledBy.entityId
+      :type: CHARACTER VARYING
+    - last_scheduled_by_entity_type:
+      :source: lastScheduledBy.entityType
+      :type: CHARACTER VARYING
+    - last_scheduled_at:
+      :source: lastScheduledAt
+      :type: timestamp without time zone
+    - active:
+      :source: active
+      :type: BOOLEAN
+    - deleted:
+      :source: deleted
+      :type: BOOLEAN
+    - name:
+      :source: name
+      :type: CHARACTER VARYING
+    - details_type:
+      :source: details.type
+      :type: CHARACTER VARYING
+    - details_sql_query:
+      :source: details.sqlQuery
+      :type: CHARACTER VARYING
+    :meta:
+      :table: reports
+      :extra_props: JSON
+
+
+  reportJobs:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - status:
+        :source: status
+        :type: CHARACTER VARYING
+      - reportName:
+        :source: reportName
+        :type: CHARACTER VARYING
+      - reportId:
+        :source: reportId
+        :type: CHARACTER VARYING
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+      - updated_at:
+        :source: updatedAt
+        :type: timestamp without time zone
+      - input_type:
+        :source: input.type
+        :type: CHARACTER VARYING
+      - input_sql_query:
+        :source: input.sqlQuery
+        :type: CHARACTER VARYING
+      - result_type:
+        :source: result.type
+        :type: CHARACTER VARYING
+      - result_number:
+        :source: result.number
+        :type: DECIMAL
+    :meta:
+      :table: report_jobs
+      :extra_props: JSON
+
+
+  partnerSearchProductStats:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - user_id:
+        :source: userId
+        :type: CHARACTER VARYING
+      - rating:
+        :source: rating
+        :type: BIGINT
+      - city_rank:
+        :source: cityRank
+        :type: BIGINT
+      - unit_rank:
+        :source: unitRank
+        :type: BIGINT
+      - organization_rank:
+        :source: organizationRank
+        :type: BIGINT
+      - response_time_seconds:
+        :source: responseTimeSeconds
+        :type: BIGINT
+      - enquiries_count:
+        :source: enquiriesCount
+        :type: BIGINT
+      - created_by_entity_id:
+        :source: createdBy.entityId
+        :type: CHARACTER VARYING
+      - created_by_entity_type:
+        :source: createdBy.entityType
+        :type: CHARACTER VARYING
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+      - updated_by_entity_id:
+        :source: updatedBy.entityId
+        :type: CHARACTER VARYING
+      - updated_by_entity_type:
+        :source: updatedBy.entityType
+        :type: CHARACTER VARYING
+      - updated_at:
+        :source: updatedAt
+        :type: timestamp without time zone
+      - deleted:
+        :source: deleted
+        :type: BOOLEAN
+    :meta:
+      :table: partner_search_product_stats
+      :extra_props: JSON
+
+
+  partnerUnitSearchProductStats:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - unit_id:
+        :source: unitId
+        :type: CHARACTER VARYING
+      - rating:
+        :source: rating
+        :type: BIGINT
+      - city_rank:
+        :source: cityRank
+        :type: BIGINT
+      - response_time_seconds:
+        :source: responseTimeSeconds
+        :type: BIGINT
+      - enquiries_count:
+        :source: enquiriesCount
+        :type: BIGINT
+      - response_rate_percent:
+        :source: responseRatePercent
+        :type: DECIMAL
+      - created_by_entity_id:
+        :source: createdBy.entityId
+        :type: CHARACTER VARYING
+      - created_by_entity_type:
+        :source: createdBy.entityType
+        :type: CHARACTER VARYING
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+      - updated_by_entity_id:
+        :source: updatedBy.entityId
+        :type: CHARACTER VARYING
+      - updated_by_entity_type:
+        :source: updatedBy.entityType
+        :type: CHARACTER VARYING
+      - updated_at:
+        :source: updatedAt
+        :type: timestamp without time zone
+      - deleted:
+        :source: deleted
+        :type: BOOLEAN
+    :meta:
+      :table: partner_unit_search_product_stats
+      :extra_props: JSON
