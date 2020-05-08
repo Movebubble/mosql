@@ -77,7 +77,7 @@ accountDB:
       :type: BOOLEAN
     - fees_information:
       :source: searchProductDetails.feesInformation
-      :type: BOOLEAN
+      :type: CHARACTER VARYING
     - success_fee_type:
       :source: searchProductDetails.successFee.type
       :type: CHARACTER VARYING

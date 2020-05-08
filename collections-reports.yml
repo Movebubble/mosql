@@ -98,7 +98,7 @@ reportDB:
         :type: CHARACTER VARYING
       - rating:
         :source: rating
-        :type: BIGINT
+        :type: DECIMAL
       - city_rank:
         :source: cityRank
         :type: BIGINT
@@ -150,7 +150,7 @@ reportDB:
         :type: CHARACTER VARYING
       - rating:
         :source: rating
-        :type: BIGINT
+        :type: DECIMAL
       - city_rank:
         :source: cityRank
         :type: BIGINT

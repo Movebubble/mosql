@@ -64,7 +64,7 @@ propertyDB:
       :type: INTEGER
     - details_apartment_number:
       :source: details.apartmentNumber
-      :type: INTEGER
+      :type: CHARACTER VARYING
     - details_furnishing_type:
       :source: details.furnishingType
       :type: CHARACTER VARYING
@@ -155,7 +155,7 @@ propertyDB:
     - active:
       :source: active
       :type: BOOLEAN
-    - state_descritption:
+    - state_description:
       :source: stateDescription
       :type: CHARACTER VARYING
     - activity_watches_count:
