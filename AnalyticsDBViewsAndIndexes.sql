@@ -181,6 +181,38 @@ CREATE MATERIALIZED VIEW renter_search_filters AS
 REFRESH MATERIALIZED VIEW renter_search_filters;
 
 
+DROP MATERIALIZED VIEW IF EXISTS renter_searches_traced_searches;
+CREATE MATERIALIZED VIEW renter_searches_traced_searches AS
+ WITH t_searches AS (
+         SELECT renter_searches.id,
+            json_array_elements(renter_searches._extra_props -> 'tracedSearches'::text) AS ts
+           FROM renter_searches
+        )
+ SELECT t_searches.id,
+    t_searches.ts ->> 'traceSearchId'::text AS trace_search_id,
+    (t_searches.ts ->> 'createdAt'::text)::timestamp without time zone AS created_at,
+    (t_searches.ts -> 'pagination' ->> 'from')::int AS pagination_from,
+    (t_searches.ts -> 'pagination' ->> 'to')::int AS pagination_to
+   FROM t_searches;
+REFRESH MATERIALIZED VIEW renter_searches_traced_searches;
+
+
+DROP MATERIALIZED VIEW IF EXISTS video_groups_statuses;
+CREATE MATERIALIZED VIEW video_groups_statuses AS
+ WITH vg AS (
+         SELECT video_groups.id,
+	 	 video_groups.details_property_id,
+	 	 video_groups.details_community_id,
+            json_array_elements(video_groups._extra_props -> 'statuses'::text) AS s
+           FROM video_groups
+        )
+ SELECT vg.id, vg.details_property_id, vg.details_community_id,
+    vg.s ->> 'statusType'::text AS status_type,
+    (vg.s ->> 'createdAt'::text)::timestamp without time zone AS created_at,
+    (vg.s -> 'createdBy' ->> 'entityId')::text AS created_by_entity_id,
+    (vg.s -> 'createdBy' ->> 'entityType')::text AS created_by_entity_type
+   FROM vg;
+REFRESH MATERIALIZED VIEW video_groups_statuses;
 
 
 /* Refresh views */
@@ -193,6 +225,8 @@ REFRESH MATERIALIZED VIEW chat_messages_transmitted;
 REFRESH MATERIALIZED VIEW enquiries_interactions;
 REFRESH MATERIALIZED VIEW property_sources;
 REFRESH MATERIALIZED VIEW property_features;
+REFRESH MATERIALIZED VIEW video_groups_statuses;
+REFRESH MATERIALIZED VIEW renter_searches_traced_searches;
 
 
 
@@ -240,12 +274,6 @@ CREATE INDEX acl_operation_and_subject_type_and_subject_id_idx ON acl (operation
 DROP INDEX IF EXISTS acl_operation_and_object_type_and_object_id_idx;
 CREATE INDEX acl_operation_and_object_type_and_object_id_idx ON acl (operation,object_type,object_id);
 
-DROP INDEX IF EXISTS analytics_events_type_and_user_id_idx;
-CREATE INDEX analytics_events_type_and_user_id_idx ON analytics_events (type,user_id);
-
-DROP INDEX IF EXISTS analytics_events_type_and_type_details_property_id_idx;
-CREATE INDEX analytics_events_type_and_type_details_property_id_idx ON analytics_events (type,type_details_property_id);
-
 DROP INDEX IF EXISTS videos_video_group_id_idx;
 CREATE INDEX videos_video_group_id_idx ON videos (video_group_id);
 
@@ -275,3 +303,15 @@ CREATE INDEX video_processing_runs_video_id_idx ON video_processing_runs (video_
 
 DROP INDEX IF EXISTS video_processing_runs_video_group_id_idx;
 CREATE INDEX video_processing_runs_video_group_id_idx ON video_processing_runs (video_group_id);
+
+DROP INDEX IF EXISTS renter_searches_traced_searches_trace_search_id_idx;
+CREATE INDEX renter_searches_traced_searches_trace_search_id_idx ON renter_searches_traced_searches (trace_search_id);
+
+DROP INDEX IF EXISTS report_jobs_report_name_idx;
+CREATE INDEX report_jobs_report_name_idx ON report_jobs (report_name);
+
+DROP INDEX IF EXISTS analytics_events_app_key_and_type_and_user_id_idx;
+CREATE INDEX analytics_events_app_key_and_type_and_user_id_idx ON analytics_events (app_key, type, user_id);
+
+DROP INDEX IF EXISTS analytics_events_app_key_and_type_and_related_unit_package_id_idx;
+CREATE INDEX analytics_events_app_key_and_type_and_related_unit_package_id_idx ON analytics_events (app_key, type, type_details_related_unit_package_id);
