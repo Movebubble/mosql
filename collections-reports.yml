@@ -59,10 +59,13 @@ reportDB:
       - status:
         :source: status
         :type: CHARACTER VARYING
-      - reportName:
+      - report_type:
+        :source: reportType
+        :type: CHARACTER VARYING
+      - report_name:
         :source: reportName
         :type: CHARACTER VARYING
-      - reportId:
+      - report_id:
         :source: reportId
         :type: CHARACTER VARYING
       - created_at:
