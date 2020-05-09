@@ -42,6 +42,7 @@ ${appName}-properties
 ${appName}-property-watches
 ${appName}-renters
 ${appName}-saved-searches
+${appName}-traced-searches
 ${appName}-sources
 ${appName}-user-devices
 ${appName}-users

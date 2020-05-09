@@ -181,22 +181,6 @@ CREATE MATERIALIZED VIEW renter_search_filters AS
 REFRESH MATERIALIZED VIEW renter_search_filters;
 
 
-DROP MATERIALIZED VIEW IF EXISTS renter_searches_traced_searches;
-CREATE MATERIALIZED VIEW renter_searches_traced_searches AS
- WITH t_searches AS (
-         SELECT renter_searches.id,
-            json_array_elements(renter_searches._extra_props -> 'tracedSearches'::text) AS ts
-           FROM renter_searches
-        )
- SELECT t_searches.id,
-    t_searches.ts ->> 'traceSearchId'::text AS trace_search_id,
-    (t_searches.ts ->> 'createdAt'::text)::timestamp without time zone AS created_at,
-    (t_searches.ts -> 'pagination' ->> 'from')::int AS pagination_from,
-    (t_searches.ts -> 'pagination' ->> 'to')::int AS pagination_to
-   FROM t_searches;
-REFRESH MATERIALIZED VIEW renter_searches_traced_searches;
-
-
 DROP MATERIALIZED VIEW IF EXISTS video_groups_statuses;
 CREATE MATERIALIZED VIEW video_groups_statuses AS
  WITH vg AS (
@@ -226,7 +210,6 @@ REFRESH MATERIALIZED VIEW enquiries_interactions;
 REFRESH MATERIALIZED VIEW property_sources;
 REFRESH MATERIALIZED VIEW property_features;
 REFRESH MATERIALIZED VIEW video_groups_statuses;
-REFRESH MATERIALIZED VIEW renter_searches_traced_searches;
 
 
 
@@ -304,8 +287,8 @@ CREATE INDEX video_processing_runs_video_id_idx ON video_processing_runs (video_
 DROP INDEX IF EXISTS video_processing_runs_video_group_id_idx;
 CREATE INDEX video_processing_runs_video_group_id_idx ON video_processing_runs (video_group_id);
 
-DROP INDEX IF EXISTS renter_searches_traced_searches_trace_search_id_idx;
-CREATE INDEX renter_searches_traced_searches_trace_search_id_idx ON renter_searches_traced_searches (trace_search_id);
+DROP INDEX IF EXISTS renter_traced_searches_saved_search_id_idx;
+CREATE INDEX renter_traced_searches_saved_search_id_idx ON renter_traced_searches (saved_search_id);
 
 DROP INDEX IF EXISTS report_jobs_report_name_idx;
 CREATE INDEX report_jobs_report_name_idx ON report_jobs (report_name);

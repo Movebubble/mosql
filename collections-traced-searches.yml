@@ -1,0 +1,21 @@
+propertyDB:
+  renterTracedSearches:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - saved_search_id:
+        :source: savedSearchId
+        :type: CHARACTER VARYING
+      - pagination_from:
+        :source: pagination.from
+        :type: BIGINT
+      - pagination_to:
+        :source: pagination.to
+        :type: BIGINT
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+    :meta:
+      :table: renter_traced_searches
+      :extra_props: JSON

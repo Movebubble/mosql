@@ -41,6 +41,7 @@ mosql-properties
 mosql-property-watches
 mosql-renters
 mosql-saved-searches
+mosql-traced-searches
 mosql-sources
 mosql-user-devices
 mosql-users
