@@ -40,6 +40,9 @@ reportDB:
     - name:
       :source: name
       :type: CHARACTER VARYING
+    - description:
+      :source: description
+      :type: CHARACTER VARYING
     - details_type:
       :source: details.type
       :type: CHARACTER VARYING
