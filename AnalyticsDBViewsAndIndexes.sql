@@ -290,11 +290,11 @@ CREATE INDEX video_processing_runs_video_group_id_idx ON video_processing_runs (
 DROP INDEX IF EXISTS renter_traced_searches_saved_search_id_idx;
 CREATE INDEX renter_traced_searches_saved_search_id_idx ON renter_traced_searches (saved_search_id);
 
-DROP INDEX IF EXISTS report_jobs_report_name_idx;
-CREATE INDEX report_jobs_report_name_idx ON report_jobs (report_name);
-
 DROP INDEX IF EXISTS analytics_events_app_key_and_type_and_user_id_idx;
 CREATE INDEX analytics_events_app_key_and_type_and_user_id_idx ON analytics_events (app_key, type, user_id);
 
 DROP INDEX IF EXISTS analytics_events_app_key_and_type_and_related_unit_package_id_idx;
 CREATE INDEX analytics_events_app_key_and_type_and_related_unit_package_id_idx ON analytics_events (app_key, type, type_details_related_unit_package_id);
+
+DROP INDEX IF EXISTS report_jobs_created_at_and_status_and_report_name_idx;
+CREATE INDEX report_jobs_created_at_and_status_and_report_name_idx ON report_jobs (created_at, status, report_name);
