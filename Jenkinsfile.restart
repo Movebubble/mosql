@@ -164,33 +164,37 @@ pipeline {
               APP_NAME="${MOSQL_APPS_LIST}"
             fi
 
-            if [ "refresh-materialized-view" != "$APP_NAME" ]; then
-              echo "[INFO] Stop MoSQL jobs"
-              for APP in $APP_NAME; do
-                kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=0
-                kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
-              done
-            fi
+            if [ "refresh-materialized-view" = "$APP_NAME" ]; then
+                helmfile \
+                  -f helmfile/etl.yaml \
+                  -e $KUBE_CONTEXT \
+                  -l app_name=$APP \
+                  apply
+            else
+                echo "[INFO] Stop MoSQL jobs"
+                for APP in $APP_NAME; do
+                  kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=0
+                  kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
+                done
 
-            echo "[INFO] Reload MoSQL jobs configuration"
-            for APP in $APP_NAME; do
-              DEPLOY_IMAGE="$(kubectl get deploy -n etl $APP -o jsonpath="{.spec.template.spec.containers[0].image}")"
-              DEPLOY_IMAGE_REPO="${DEPLOY_IMAGE%:*}"
-              DEPLOY_IMAGE_TAG="${DEPLOY_IMAGE#*:}"
-              helmfile \
-                -f helmfile/etl.yaml \
-                -e $KUBE_CONTEXT \
-                -l app_name=$APP \
-                --state-values-set image.repository="${DEPLOY_IMAGE_REPO}",image.tag="${DEPLOY_IMAGE_TAG}" \
-                apply
-            done
+                echo "[INFO] Reload MoSQL jobs configuration"
+                for APP in $APP_NAME; do
+                  DEPLOY_IMAGE="$(kubectl get deploy -n etl $APP -o jsonpath="{.spec.template.spec.containers[0].image}")"
+                  DEPLOY_IMAGE_REPO="${DEPLOY_IMAGE%:*}"
+                  DEPLOY_IMAGE_TAG="${DEPLOY_IMAGE#*:}"
+                  helmfile \
+                    -f helmfile/etl.yaml \
+                    -e $KUBE_CONTEXT \
+                    -l app_name=$APP \
+                    --state-values-set image.repository="${DEPLOY_IMAGE_REPO}",image.tag="${DEPLOY_IMAGE_TAG}" \
+                    apply
+                done
 
-            if [ "refresh-materialized-view" != "$APP_NAME" ]; then
-              echo "[INFO] Start MoSQL jobs"
-              for APP in $APP_NAME; do
-                kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=1
-                kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
-              done
+                echo "[INFO] Start MoSQL jobs"
+                for APP in $APP_NAME; do
+                  kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=1
+                  kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
+                done
             fi
           '''
         }
