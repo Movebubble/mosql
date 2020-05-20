@@ -164,11 +164,13 @@ pipeline {
               APP_NAME="${MOSQL_APPS_LIST}"
             fi
 
-            echo "[INFO] Stop MoSQL jobs"
-            for APP in $APP_NAME; do
-              kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=0
-              kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
-            done
+            if [ "refresh-materialized-view" != "$APP_NAME" ]; then
+              echo "[INFO] Stop MoSQL jobs"
+              for APP in $APP_NAME; do
+                kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=0
+                kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
+              done
+            fi
 
             echo "[INFO] Reload MoSQL jobs configuration"
             for APP in $APP_NAME; do
@@ -183,11 +185,13 @@ pipeline {
                 apply
             done
 
-            echo "[INFO] Start MoSQL jobs"
-            for APP in $APP_NAME; do
-              kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=1
-              kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
-            done
+            if [ "refresh-materialized-view" != "$APP_NAME" ]; then
+              echo "[INFO] Start MoSQL jobs"
+              for APP in $APP_NAME; do
+                kubectl scale deployment/$APP --context=${KUBE_CONTEXT} -n etl --replicas=1
+                kubectl rollout status deployment/$APP --context=${KUBE_CONTEXT} -n etl -w --timeout=1m
+              done
+            fi
           '''
         }
       }
