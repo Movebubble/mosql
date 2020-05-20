@@ -168,7 +168,7 @@ pipeline {
                 helmfile \
                   -f helmfile/etl.yaml \
                   -e $KUBE_CONTEXT \
-                  -l app_name=$APP \
+                  -l app_name=$APP_NAME \
                   apply
             else
                 echo "[INFO] Stop MoSQL jobs"
