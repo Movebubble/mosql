@@ -1,0 +1,213 @@
+paymentDB:
+  transactions:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - propertyId:
+        :source: propertyId
+        :type: CHARACTER VARYING
+      - propertyUnitId:
+        :source: propertyUnitId
+        :type: CHARACTER VARYING
+      - propertyOrgId:
+        :source: propertyOrgId
+        :type: CHARACTER VARYING
+      - chatId:
+        :source: chatId
+        :type: CHARACTER VARYING
+      - monthPriceAmountInCents:
+        :source: monthPriceAmountInCents
+        :type: INTEGER
+      - renterIds:
+        :source: renterIds
+        :type: TEXT ARRAY
+      - contractLengthInMonths:
+        :source: contractDetails.contractLengthInMonths
+        :type: INTEGER
+      - moveDate:
+        :source: contractDetails.moveDate.date
+        :type: timestamp without time zone
+      - flexibleMoveDate:
+        :source: contractDetails.moveDate.flexibleDate
+        :type: BOOLEAN
+      - state:
+        :source: state
+        :type: CHARACTER VARYING
+      - created_by_entity_id:
+        :source: createdBy.entityId
+        :type: CHARACTER VARYING
+      - created_by_entity_type:
+        :source: createdBy.entityType
+        :type: CHARACTER VARYING
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+      - updated_by_entity_id:
+        :source: updatedBy.entityId
+        :type: CHARACTER VARYING
+      - updated_by_entity_type:
+        :source: updatedBy.entityType
+        :type: CHARACTER VARYING
+      - updated_at:
+        :source: updatedAt
+        :type: timestamp without time zone
+      - indexed_at:
+        :source: indexedAt
+        :type: timestamp without time zone
+      :meta:
+        :table: transactions
+        :extra_props: JSON
+
+  payments:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - transactionId:
+        :source: transactionId
+        :type: CHARACTER VARYING
+      - status:
+        :source: status
+        :type: CHARACTER VARYING
+      - captureType:
+        :source: captureType
+        :type: CHARACTER VARYING
+      - paymentType:
+        :source: paymentType
+        :type: CHARACTER VARYING
+      - serviceType:
+        :source: serviceType
+        :type: CHARACTER VARYING
+      - intentId:
+        :source: serviceTypeSpecificDetails.paymentIntent.intentId
+        :type: CHARACTER VARYING
+      - intentStatus:
+        :source: serviceTypeSpecificDetails.paymentIntent.status
+        :type: CHARACTER VARYING
+      - intentCreatedAt:
+        :source: serviceTypeSpecificDetails.paymentIntent.createdAt
+        :type: timestamp without time zone
+      - intentCanceledAt:
+        :source: serviceTypeSpecificDetails.paymentIntent.canceledAt
+        :type: timestamp without time zone
+      - refundId:
+        :source: serviceTypeSpecificDetails.refund.refundId
+        :type: CHARACTER VARYING
+      - refundStatus:
+        :source: serviceTypeSpecificDetails.refund.status
+        :type: CHARACTER VARYING
+      - refundCreatedAt:
+        :source: serviceTypeSpecificDetails.refund.createdAt
+        :type: CHARACTER VARYING
+      - refundFailureReason:
+        :source: serviceTypeSpecificDetails.refund.failureReason
+        :type: CHARACTER VARYING
+      - refunded:
+        :source: refunded
+        :type: BOOLEAN
+      - indexedAt:
+        :source: indexedAt
+        :type: timestamp without time zone
+      :meta:
+        :table: payments
+        :extra_props: JSON
+
+  paymentAccounts:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - referenceType:
+        :source: referenceType
+        :type: CHARACTER VARYING
+      - referenceId:
+        :source: referenceId
+        :type: CHARACTER VARYING
+      - currency:
+        :source: currency
+        :type: CHARACTER VARYING
+      - name:
+        :source: name
+        :type: CHARACTER VARYING
+      - email:
+        :source: email
+        :type: CHARACTER VARYING
+      - contactName:
+        :source: contactName
+        :type: CHARACTER VARYING
+      - serviceType:
+        :source: serviceType
+        :type: CHARACTER VARYING
+      - customerId:
+        :source: serviceTypeSpecificDetails.customerId
+        :type: CHARACTER VARYING
+      - deleted:
+        :source: deleted
+        :type: BOOLEAN
+      - indexedAt:
+        :source: indexedAt
+        :type: timestamp without time zone
+      :meta:
+        :table: payment_accounts
+        :extra_props: JSON
+
+  paymentInvoices:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - paymentAccountId:
+        :source: paymentAccountId
+        :type: CHARACTER VARYING
+      - currency:
+        :source: currency
+        :type: CHARACTER VARYING
+      - itemPaymentType:
+        :source: paymentType
+        :type: CHARACTER VARYING
+      - amountInCents:
+        :source: amountInCents
+        :type: BIGINT
+      - reduceAmountInCents:
+        :source: reduceAmountInCents
+        :type: BIGINT
+      - effectiveSumInCents:
+        :source: effectiveSumInCents
+        :type: BIGINT
+      - invoiceType:
+        :source: invoiceType
+        :type: CHARACTER VARYING
+      - itemPaymentTransactionId:
+        :source: invoiceTypeSpecificDetails.paymentTransactionId
+        :type: CHARACTER VARYING
+      - aggregateInvoiceItemIds:
+        :source: invoiceTypeSpecificDetails.invoiceItemIds
+        :type: TEXT ARRAY
+      - aggregateServiceType:
+        :source: invoiceTypeSpecificDetails.serviceType
+        :type: CHARACTER VARYING
+      - aggregateInvoiceId:
+        :source: invoiceTypeSpecificDetails.serviceTypeSpecificDetails.invoiceId
+        :type: CHARACTER VARYING
+      - aggregateInvoiceCreatedAt:
+        :source: invoiceTypeSpecificDetails.serviceTypeSpecificDetails.createdAt
+        :type: timestamp without time zone
+      - aggregateInvoiceStatus:
+        :source: invoiceTypeSpecificDetails.serviceTypeSpecificDetails.status
+        :type: CHARACTER VARYING
+      - aggregateInvoiceNumber:
+        :source: invoiceTypeSpecificDetails.serviceTypeSpecificDetails.number
+        :type: CHARACTER VARYING
+      - createdAt:
+        :source: createdAt
+        :type: timestamp without time zone
+      - sent:
+        :source: sent
+        :type: BOOLEAN
+      - indexedAt:
+        :source: indexedAt
+        :type: timestamp without time zone
+      :meta:
+        :table: payment_invoices
+        :extra_props: JSON
