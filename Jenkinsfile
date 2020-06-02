@@ -52,6 +52,7 @@ ${appName}-location
 ${appName}-notifications
 ${appName}-properties-areas
 ${appName}-reports
+${appName}-payment-transactions
 """
 
 properties([
