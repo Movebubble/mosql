@@ -226,6 +226,22 @@ analyticsDB:
       - type_details_pn_id:
         :source: typeDetails.pnId
         :type: CHARACTER VARYING
+      - type_details_transaction_id:
+        :source: typeDetails.transactionId
+        :type: CHARACTER VARYING
+      - type_details_transaction_active:
+        :source: typeDetails.transactionActive
+        :type: BOOLEAN
+      - type_details_transaction_status:
+        :source: typeDetails.transactionStatus
+        :type: CHARACTER VARYING
+      - type_details_transaction_started_at:
+        :source: typeDetails.transactionStartedAt
+        :type: timestamp without time zone
+      - type_details_transaction_steps:
+        :source: typeDetails.transactionSteps
+        :type: TEXT ARRAY
+        :array_type: TEXT ARRAY
       - client_date_time:
         :source: clientDateTime
         :type: timestamp without time zone
