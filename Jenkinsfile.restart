@@ -52,7 +52,7 @@ mosql-notifications
 mosql-properties-areas
 mosql-reports
 mosql-contextual
-payment-transactions'''
+mosql-payment-transactions'''
 
 def appsList = """
 mosql
