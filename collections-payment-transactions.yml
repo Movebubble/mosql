@@ -1,4 +1,4 @@
-paymentDB:
+transactionDB:
   transactions:
     :columns:
     - id:
@@ -59,6 +59,7 @@ paymentDB:
       :table: transactions
       :extra_props: JSON
 
+paymentDB:
   payments:
     :columns:
     - id:
