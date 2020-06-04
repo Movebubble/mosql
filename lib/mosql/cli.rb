@@ -117,6 +117,7 @@ module MoSQL
         log.level = Log4r::DEBUG
       else
         log.level = Log4r::INFO
+        Mongo::Logger.logger.level = Logger::INFO
       end
     end
 
