@@ -211,6 +211,26 @@ CREATE MATERIALIZED VIEW transactions_state_audit AS
  FROM ts;
  REFRESH MATERIALIZED VIEW transactions_state_audit;
 
+DROP MATERIALIZED VIEW IF EXISTS transactions_steps;
+CREATE MATERIALIZED VIEW transactions_steps AS
+ WITH ts AS (
+         SELECT transactions.id,
+            json_array_elements(transactions._extra_props -> 'steps'::text) AS s
+           FROM transactions
+        )
+ SELECT ts.id,
+    ts.s ->> 'step'::text AS step,
+    (ts.s ->> 'createdAt'::text)::timestamp without time zone AS created_at,
+    (ts.s -> 'createdBy' ->> 'entityId')::text AS created_by_entity_id,
+    (ts.s -> 'createdBy' ->> 'entityType')::text AS created_by_entity_type,
+	(ts.s -> 'stepDetails' ->> 'paymentId')::text AS payment_id,
+	(ts.s -> 'stepDetails' ->> 'amountInCents')::text AS amount_in_cents,
+	(ts.s -> 'stepDetails' ->> 'feePaymentStartedStatus')::text AS fee_payment_started_status,
+	(ts.s -> 'stepDetails' ->> 'refundStatus')::text AS refund_status,
+	(ts.s -> 'stepDetails' ->> 'reduceAmountInCents')::text AS reduce_amount_in_cents
+   FROM ts;
+REFRESH MATERIALIZED VIEW transactions_steps;
+
 /* Refresh views */
 REFRESH MATERIALIZED VIEW units_packages;
 REFRESH MATERIALIZED VIEW users_app_logins;
@@ -223,7 +243,7 @@ REFRESH MATERIALIZED VIEW property_sources;
 REFRESH MATERIALIZED VIEW property_features;
 REFRESH MATERIALIZED VIEW video_groups_statuses;
 REFRESH MATERIALIZED VIEW transactions_state_audit;
-
+REFRESH MATERIALIZED VIEW transactions_steps;
 
 
 /* Indexes */
