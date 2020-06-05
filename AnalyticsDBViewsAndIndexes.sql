@@ -198,6 +198,18 @@ CREATE MATERIALIZED VIEW video_groups_statuses AS
    FROM vg;
 REFRESH MATERIALIZED VIEW video_groups_statuses;
 
+DROP MATERIALIZED VIEW IF EXISTS transactions_state_audit;
+CREATE MATERIALIZED VIEW transactions_state_audit AS
+ WITH ts AS (
+         SELECT transactions.id,
+            json_array_elements(transactions._extra_props -> 'stateAudit'::text) AS s
+           FROM transactions
+        )
+ SELECT ts.id,
+    ts.s ->> 'state'::text AS state,
+    (ts.s ->> 'createdAt'::text)::timestamp without time zone AS created_at
+ FROM ts;
+ REFRESH MATERIALIZED VIEW transactions_state_audit;
 
 /* Refresh views */
 REFRESH MATERIALIZED VIEW units_packages;
@@ -210,6 +222,7 @@ REFRESH MATERIALIZED VIEW enquiries_interactions;
 REFRESH MATERIALIZED VIEW property_sources;
 REFRESH MATERIALIZED VIEW property_features;
 REFRESH MATERIALIZED VIEW video_groups_statuses;
+REFRESH MATERIALIZED VIEW transactions_state_audit;
 
 
 
