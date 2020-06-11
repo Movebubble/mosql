@@ -121,10 +121,6 @@ chatDB:
     - expire_at:
       :source: expireAt
       :type: timestamp without time zone
-    - invite_accept_entity_ids:
-      :source: inviteAccepts.acceptBy.entityId
-      :type: TEXT ARRAY
-      :array_type: TEXT ARRAY
     :meta:
       :table: chat_invites
       :extra_props: JSON
