@@ -238,6 +238,9 @@ analyticsDB:
       - type_details_transaction_started_at:
         :source: typeDetails.transactionStartedAt
         :type: timestamp without time zone
+      - type_details_invite_id:
+        :source: typeDetails.inviteId
+        :type: CHARACTER VARYING
       - type_details_transaction_steps:
         :source: typeDetails.transactionSteps
         :type: TEXT ARRAY
