@@ -125,3 +125,6 @@ chatDB:
       :source: inviteAccepts.acceptBy.entityId
       :type: TEXT ARRAY
       :array_type: TEXT ARRAY
+    :meta:
+      :table: chat_invites
+      :extra_props: JSON
