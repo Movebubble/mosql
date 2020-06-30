@@ -52,7 +52,8 @@ mosql-notifications
 mosql-properties-areas
 mosql-reports
 mosql-contextual
-mosql-payment-transactions'''
+mosql-payment-transactions
+mosql-open-banking-checks'''
 
 def appsList = """
 mosql

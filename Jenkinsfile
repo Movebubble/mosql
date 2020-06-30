@@ -53,6 +53,7 @@ ${appName}-notifications
 ${appName}-properties-areas
 ${appName}-reports
 ${appName}-payment-transactions
+${appName}-open-banking-checks
 """
 
 properties([
