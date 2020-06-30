@@ -31,12 +31,6 @@ referenceDB:
     - error_description:
       :source: errorDescription
       :type: CHARACTER VARYING
-    - transactionId:
-      :source: transactionId
-      :type: CHARACTER VARYING
-    - transactionId:
-      :source: transactionId
-      :type: CHARACTER VARYING
     - created_at:
       :source: createdAt
       :type: timestamp without time zone
