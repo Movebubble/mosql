@@ -245,6 +245,21 @@ analyticsDB:
         :source: typeDetails.transactionSteps
         :type: TEXT ARRAY
         :array_type: TEXT ARRAY
+      - type_details_open_banking_flow_success:
+        :source: typeDetails.openBankingFlowSuccess
+        :type: BOOLEAN
+      - type_details_affordability_report_status:
+        :source: typeDetails.affordabilityReportStatus
+        :type: CHARACTER VARYING
+      - type_details_affordability_report_percentage:
+        :source: typeDetails.affordabilityReportPercentage
+        :type: INTEGER
+      - type_details_affordability_report_risk_profile_type:
+        :source: typeDetails.affordabilityReportRiskProfileType
+        :type: CHARACTER VARYING
+      - type_details_affordability_report_risk_profile_percentage:
+        :source: typeDetails.affordabilityReportRiskProfilePercentage
+        :type: INTEGER
       - client_date_time:
         :source: clientDateTime
         :type: timestamp without time zone

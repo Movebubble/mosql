@@ -1,0 +1,114 @@
+referenceDB:
+  openBankingChecks:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - transaction_id:
+      :source: transactionId
+      :type: CHARACTER VARYING
+    - user_id:
+      :source: userId
+      :type: CHARACTER VARYING
+    - report_id:
+      :source: reportId
+      :type: CHARACTER VARYING
+    - type:
+      :source: type
+      :type: CHARACTER VARYING
+    - credit_kudos_report_id:
+      :source: typeDetails.creditKudosReportId
+      :type: CHARACTER VARYING
+    - status:
+      :source: status
+      :type: CHARACTER VARYING
+    - deleted:
+      :source: deleted
+      :type: CHARACTER VARYING
+    - type_error:
+      :source: typeError
+      :type: CHARACTER VARYING
+    - error_description:
+      :source: errorDescription
+      :type: CHARACTER VARYING
+    - transactionId:
+      :source: transactionId
+      :type: CHARACTER VARYING
+    - transactionId:
+      :source: transactionId
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - updated_at:
+      :source: updatedAt
+      :type: timestamp without time zone
+    - deleted_at:
+      :source: deletedAt
+      :type: timestamp without time zone
+    - indexed_at:
+      :source: indexedAt
+      :type: timestamp without time zone
+    - scheduled_at:
+      :source: scheduledAt
+      :type: timestamp without time zone
+    - created_by_entity_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_by_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    - updated_by_entity_id:
+      :source: updatedBy.entityId
+      :type: CHARACTER VARYING
+    - updated_by_entity_type:
+      :source: updatedBy.entityType
+      :type: CHARACTER VARYING
+    - deleted_by_entity_id:
+      :source: deletedBy.entityId
+      :type: CHARACTER VARYING
+    - deleted_by_entity_type:
+      :source: deletedBy.entityType
+      :type: CHARACTER VARYING
+    - scheduled_by_entity_id:
+      :source: scheduledBy.entityId
+      :type: CHARACTER VARYING
+    - scheduled_by_entity_type:
+      :source: scheduledBy.entityType
+      :type: CHARACTER VARYING
+    - scheduled_counter:
+      :source: scheduledCounter
+      :type: INTEGER
+    :meta:
+      :table: open_banking_checks
+      :extra_props: JSON
+
+  openBankingReports:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - user_id:
+      :source: userId
+      :type: CHARACTER VARYING
+    - providers:
+      :source: providers
+      :type: TEXT ARRAY
+    - type:
+      :source: type
+      :type: CHARACTER VARYING
+    - created_at:
+      :source: createdAt
+      :type: timestamp without time zone
+    - indexed_at:
+      :source: indexedAt
+      :type: timestamp without time zone
+    - created_by_entity_id:
+      :source: createdBy.entityId
+      :type: CHARACTER VARYING
+    - created_by_entity_type:
+      :source: createdBy.entityType
+      :type: CHARACTER VARYING
+    :meta:
+      :table: open_banking_reports
+      :extra_props: JSON
