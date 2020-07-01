@@ -152,6 +152,9 @@ videoDB:
     - preview_image_small_mobile_size_url:
       :source: previewImage.smallMobileSizeUrl
       :type: CHARACTER VARYING
+    - video_text_extraction_processing_details_extracted_text:
+      :source: videoTextExtractionProcessingDetails.extractedText
+      :type: CHARACTER VARYING
     :meta:
       :table: videos
       :extra_props: JSON
