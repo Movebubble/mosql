@@ -106,6 +106,12 @@ analyticsDB:
       - type:
         :source: type
         :type: CHARACTER VARYING
+      - location_details_longitude:
+        :source: locationDetails.longitude
+        :type: DECIMAL
+      - location_details_latitude:
+        :source: locationDetails.latitude
+        :type: DECIMAL
       - device_details_device_id:
         :source: deviceDetails.deviceId
         :type: CHARACTER VARYING
