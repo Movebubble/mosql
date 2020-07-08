@@ -39,6 +39,7 @@ ${appName}-enquiries
 ${appName}-videos
 ${appName}-org
 ${appName}-properties
+${appName}-properties-audit
 ${appName}-property-watches
 ${appName}-renters
 ${appName}-saved-searches

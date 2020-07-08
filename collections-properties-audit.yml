@@ -1,0 +1,24 @@
+propertyDB:
+  propertyAudits:
+    :columns:
+    - id:
+      :source: _id
+      :type: CHARACTER VARYING
+    - property_id:
+      :source: propertyId
+      :type: CHARACTER VARYING
+    - field:
+      :source: field
+      :type: CHARACTER VARYING
+    - new_value:
+      :source: newValue
+      :type: CHARACTER VARYING
+    - old_value:
+      :source: oldValue
+      :type: CHARACTER VARYING
+    - occurred_at:
+      :source: occurredAt
+      :type: timestamp without time zone
+    :meta:
+      :table: property_audits
+      :extra_props: JSON
