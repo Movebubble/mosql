@@ -37,6 +37,9 @@ transactionDB:
     - prom_code:
       :source: promoCode.code
       :type: CHARACTER VARYING
+    - promo_code_type:
+      :source: promoCode.type
+      :type: CHARACTER VARYING
     - created_by_entity_id:
       :source: createdBy.entityId
       :type: CHARACTER VARYING
