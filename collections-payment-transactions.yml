@@ -35,7 +35,7 @@ transactionDB:
       :source: state
       :type: CHARACTER VARYING
     - prom_code:
-      :source: promoCode
+      :source: promoCode.code
       :type: CHARACTER VARYING
     - created_by_entity_id:
       :source: createdBy.entityId
