@@ -1,4 +1,4 @@
-FROM ruby:2.3.7 as builder
+FROM ruby:2.7.1 as builder
 
 WORKDIR /mosql
 
@@ -6,8 +6,7 @@ COPY . ./
 RUN gem build mosql.gemspec
 
 
-
-FROM ruby:2.3.7
+FROM ruby:2.7.1
 
 WORKDIR /mosql
 
