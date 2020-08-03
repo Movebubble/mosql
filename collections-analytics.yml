@@ -247,6 +247,9 @@ analyticsDB:
       - type_details_invite_id:
         :source: typeDetails.inviteId
         :type: CHARACTER VARYING
+      - type_details_poi_id:
+        :source: typeDetails.poiId
+        :type: CHARACTER VARYING
       - type_details_transaction_steps:
         :source: typeDetails.transactionSteps
         :type: TEXT ARRAY

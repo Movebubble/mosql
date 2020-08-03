@@ -177,6 +177,9 @@ videoDB:
       - details_community_id:
         :source: details.communityId
         :type: CHARACTER VARYING
+      - details_poi_id:
+        :source: details.poiId
+        :type: CHARACTER VARYING
       - created_at:
         :source: createdAt
         :type: timestamp without time zone
@@ -210,7 +213,6 @@ videoDB:
     :meta:
       :table: video_groups
       :extra_props: JSON
-
 
 videoProcessingDB:
   videoProcessingRuns:
