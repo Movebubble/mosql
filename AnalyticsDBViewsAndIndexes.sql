@@ -302,6 +302,9 @@ CREATE INDEX video_groups_details_property_id_idx ON video_groups (details_prope
 DROP INDEX IF EXISTS video_groups_details_community_id_idx;
 CREATE INDEX video_groups_details_community_id_idx ON video_groups (details_community_id);
 
+DROP INDEX IF EXISTS video_groups_details_poi_id_idx;
+CREATE INDEX video_groups_details_poi_id_idx ON video_groups (details_poi_id);
+
 DROP INDEX IF EXISTS clip_configurations_key_idx;
 CREATE INDEX clip_configurations_key_idx ON clip_configurations (key);
 
