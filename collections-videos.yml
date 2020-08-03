@@ -159,7 +159,6 @@ videoDB:
       :table: videos
       :extra_props: JSON
 
-
   videoGroups:
     :columns:
       - id:
