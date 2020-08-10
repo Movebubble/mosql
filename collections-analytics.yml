@@ -187,6 +187,9 @@ analyticsDB:
       - type_details_video_time_millis:
         :source: typeDetails.videoTimeMillis
         :type: BIGINT
+      - type_details_time_millis:
+        :source: typeDetails.timeMillis
+        :type: BIGINT
       - type_details_related_unit_package_id:
         :source: typeDetails.relatedUnitPackageId
         :type: CHARACTER VARYING
