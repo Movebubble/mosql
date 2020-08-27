@@ -329,6 +329,9 @@ CREATE INDEX renter_traced_searches_saved_search_id_idx ON renter_traced_searche
 DROP INDEX IF EXISTS analytics_events_app_key_and_type_and_user_id_idx;
 CREATE INDEX analytics_events_app_key_and_type_and_user_id_idx ON analytics_events (app_key, type, user_id);
 
+DROP INDEX IF EXISTS analytics_events_created_at_idx;
+CREATE INDEX analytics_events_created_at_idx ON analytics_events (created_at);
+
 DROP INDEX IF EXISTS analytics_events_app_key_and_type_and_related_unit_package_id_idx;
 CREATE INDEX analytics_events_app_key_and_type_and_related_unit_package_id_idx ON analytics_events (app_key, type, type_details_related_unit_package_id);
 
