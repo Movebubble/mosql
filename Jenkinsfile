@@ -30,6 +30,8 @@ def prodEnvName     = 'prod'
 def awsRegion       = 'eu-west-2'
 def fileVersionName = 'VERSION.txt'
 
+def pathExclude          = ["AnalyticsDBViewsAndIndexes.sql", "Jenkinsfile", "Jenkinsfile.restart"]
+
 def appsList = """
 ${appName}-agents
 ${appName}-analytics
@@ -104,6 +106,19 @@ pipeline {
           currentBuild.displayName = "${commitCount}-${shortCommit}-${BUILD_NUMBER}"
           gitCommitAuthor = sh(returnStdout: true, script: 'git show --format="%aN" ${gitCommit} | head -1').trim()
 
+          // Validate if changes includes service paths
+          wrap([$class: 'BuildUser']) {
+            echo "[INFO] BUILD_USER: ${env.BUILD_USER}"
+            env.CONTINUE_BUILD = isOKToContinueBuild(currentBuild.changeSets, false, pathExclude, env.BUILD_USER, gitCommitAuthor)
+          }
+          if ("${env.CONTINUE_BUILD}" == 'true') {
+            echo "[INFO] gitCommitAuthor: ${gitCommitAuthor}"
+            echo "[INFO] Changeset validation passed. Continue the build."
+          } else {
+            currentBuild.result = 'NOT_BUILT'
+            return
+          }
+
           sh "mkdir -p ${env.JENKINS_HOME}/npm-cache/${env.JOB_NAME}"
         }
 
@@ -117,6 +132,7 @@ pipeline {
     }
 
     stage('Build and Publish Docker Image') {
+      when { environment name: 'CONTINUE_BUILD', value: 'true' }
       agent any
       steps {
         unstash "version"
@@ -140,7 +156,8 @@ pipeline {
 
     stage('Deploy to Stage') {
       when {
-        branch 'master'
+        branch 'master',
+        environment name: 'CONTINUE_BUILD', value: 'true'
       }
       agent {
         docker {
@@ -192,7 +209,8 @@ pipeline {
 
     stage('Whether to Deploy to Production') {
         when {
-          branch 'master'
+          branch 'master',
+          environment name: 'CONTINUE_BUILD', value: 'true'
         }
         steps {
             timeout(time: 24, unit: "HOURS") {
@@ -203,7 +221,8 @@ pipeline {
 
     stage('Deploy to Prod') {
       when {
-        branch 'master'
+        branch 'master',
+        environment name: 'CONTINUE_BUILD', value: 'true'
       }
       agent {
         docker {
@@ -271,30 +290,32 @@ pipeline {
     always {
       node('') {
         script {
-          try {
-            unstash 'version'
+          if (currentBuild.result == 'NOT_BUILT') {
+              try {
+                unstash 'version'
 
-            withEnv(["THE_FILE_VERSION=${fileVersionName}", "APP_NAME=${appName}", "REGISTRY_HOST=${dockerRegistryHost}"]) {
-              sh '''
-                IMAGE_TAG="$(cat ${THE_FILE_VERSION})"
+                withEnv(["THE_FILE_VERSION=${fileVersionName}", "APP_NAME=${appName}", "REGISTRY_HOST=${dockerRegistryHost}"]) {
+                  sh '''
+                    IMAGE_TAG="$(cat ${THE_FILE_VERSION})"
 
-                # Delete images on Jenkins host
-                docker rmi ${APP_NAME}:${IMAGE_TAG} || echo "Nothing to delete"
-                docker rmi ${REGISTRY_HOST}/${APP_NAME}:${IMAGE_TAG} || echo "Nothing to delete"
+                    # Delete images on Jenkins host
+                    docker rmi ${APP_NAME}:${IMAGE_TAG} || echo "Nothing to delete"
+                    docker rmi ${REGISTRY_HOST}/${APP_NAME}:${IMAGE_TAG} || echo "Nothing to delete"
 
-                # Delete <none> images
-                # docker images --filter "dangling=true" -q | xargs docker rmi || echo "Nothing to delete"
-              '''
-            }
-          } catch(caughtError) {
-            echo "Nothing to cleanup."
+                    # Delete <none> images
+                    # docker images --filter "dangling=true" -q | xargs docker rmi || echo "Nothing to delete"
+                  '''
+                }
+
+                sendMessageToSlack(slackTeam, slackChannel, slackTokenCredId, currentBuild.result,
+                    "[${currentBuild.result}] ${env.WEBAPP_NOTIFICATION_NAME} - ${currentBuild.displayName}"
+                )
+              } catch(caughtError) {
+                echo "Nothing to cleanup."
+              }
           }
         }
       }
-
-      sendMessageToSlack(slackTeam, slackChannel, slackTokenCredId, currentBuild.result,
-          "[${currentBuild.result}] ${env.WEBAPP_NOTIFICATION_NAME} - ${currentBuild.displayName}"
-      )
     }
   }
 }
