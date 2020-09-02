@@ -156,8 +156,10 @@ pipeline {
 
     stage('Deploy to Stage') {
       when {
-        branch 'master',
-        environment name: 'CONTINUE_BUILD', value: 'true'
+        allOf {
+          branch 'master'
+          environment name: 'CONTINUE_BUILD', value: 'true'
+        }
       }
       agent {
         docker {
@@ -209,8 +211,10 @@ pipeline {
 
     stage('Whether to Deploy to Production') {
         when {
-          branch 'master',
-          environment name: 'CONTINUE_BUILD', value: 'true'
+          allOf {
+            branch 'master'
+            environment name: 'CONTINUE_BUILD', value: 'true'
+          }
         }
         steps {
             timeout(time: 24, unit: "HOURS") {
@@ -221,8 +225,10 @@ pipeline {
 
     stage('Deploy to Prod') {
       when {
-        branch 'master',
-        environment name: 'CONTINUE_BUILD', value: 'true'
+        allOf {
+          branch 'master'
+          environment name: 'CONTINUE_BUILD', value: 'true'
+        }
       }
       agent {
         docker {
