@@ -337,3 +337,9 @@ CREATE INDEX analytics_events_app_key_and_type_and_related_unit_package_id_idx O
 
 DROP INDEX IF EXISTS report_jobs_created_at_and_status_and_report_name_idx;
 CREATE INDEX report_jobs_created_at_and_status_and_report_name_idx ON report_jobs (created_at, status, report_name);
+
+DROP INDEX IF EXISTS enquiries_user_id_idx;
+CREATE INDEX enquiries_user_id_idx ON enquiries (user_id);
+
+DROP INDEX IF EXISTS enquiries_property_id_idx;
+CREATE INDEX enquiries_property_id_idx ON enquiries (property_id);
