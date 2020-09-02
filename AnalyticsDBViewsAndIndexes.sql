@@ -21,11 +21,11 @@ $BODY$
 LANGUAGE plpgsql VOLATILE;
 
 
-/* Materialized views */ 
+/* Materialized views */
 
 
 DROP MATERIALIZED VIEW IF EXISTS units_packages;
-CREATE MATERIALIZED VIEW units_packages AS 
+CREATE MATERIALIZED VIEW units_packages AS
  WITH units_packages AS (
          SELECT units.id,
             json_array_elements(units._extra_props -> 'packages'::text) AS p
@@ -185,8 +185,8 @@ DROP MATERIALIZED VIEW IF EXISTS video_groups_statuses;
 CREATE MATERIALIZED VIEW video_groups_statuses AS
  WITH vg AS (
          SELECT video_groups.id,
-	 	 video_groups.details_property_id,
-	 	 video_groups.details_community_id,
+      video_groups.details_property_id,
+      video_groups.details_community_id,
             json_array_elements(video_groups._extra_props -> 'statuses'::text) AS s
            FROM video_groups
         )
@@ -223,11 +223,11 @@ CREATE MATERIALIZED VIEW transactions_steps AS
     (ts.s ->> 'createdAt'::text)::timestamp without time zone AS created_at,
     (ts.s -> 'createdBy' ->> 'entityId')::text AS created_by_entity_id,
     (ts.s -> 'createdBy' ->> 'entityType')::text AS created_by_entity_type,
-	(ts.s -> 'stepDetails' ->> 'paymentId')::text AS payment_id,
-	(ts.s -> 'stepDetails' ->> 'amountInCents')::text AS amount_in_cents,
-	(ts.s -> 'stepDetails' ->> 'feePaymentStartedStatus')::text AS fee_payment_started_status,
-	(ts.s -> 'stepDetails' ->> 'refundStatus')::text AS refund_status,
-	(ts.s -> 'stepDetails' ->> 'reduceAmountInCents')::text AS reduce_amount_in_cents
+  (ts.s -> 'stepDetails' ->> 'paymentId')::text AS payment_id,
+  (ts.s -> 'stepDetails' ->> 'amountInCents')::text AS amount_in_cents,
+  (ts.s -> 'stepDetails' ->> 'feePaymentStartedStatus')::text AS fee_payment_started_status,
+  (ts.s -> 'stepDetails' ->> 'refundStatus')::text AS refund_status,
+  (ts.s -> 'stepDetails' ->> 'reduceAmountInCents')::text AS reduce_amount_in_cents
    FROM ts;
 REFRESH MATERIALIZED VIEW transactions_steps;
 
@@ -325,6 +325,12 @@ CREATE INDEX video_processing_runs_video_group_id_idx ON video_processing_runs (
 
 DROP INDEX IF EXISTS renter_traced_searches_saved_search_id_idx;
 CREATE INDEX renter_traced_searches_saved_search_id_idx ON renter_traced_searches (saved_search_id);
+
+DROP INDEX IF EXISTS analytics_events_user_id_idx;
+CREATE INDEX analytics_events_user_id_idx ON analytics_events (user_id);
+
+DROP INDEX IF EXISTS analytics_events_app_key_idx;
+CREATE INDEX analytics_events_app_key_idx ON analytics_events (app_key);
 
 DROP INDEX IF EXISTS analytics_events_app_key_and_type_and_user_id_idx;
 CREATE INDEX analytics_events_app_key_and_type_and_user_id_idx ON analytics_events (app_key, type, user_id);
