@@ -349,3 +349,9 @@ CREATE INDEX enquiries_user_id_idx ON enquiries (user_id);
 
 DROP INDEX IF EXISTS enquiries_property_id_idx;
 CREATE INDEX enquiries_property_id_idx ON enquiries (property_id);
+
+DROP INDEX IF EXISTS renter_searches_user_id_idx;
+CREATE INDEX renter_searches_user_id_idx ON renter_searches (user_id);
+
+DROP INDEX IF EXISTS property_watches_user_id_idx;
+CREATE INDEX property_watches_user_id_idx ON property_watches (user_id);
