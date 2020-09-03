@@ -272,6 +272,9 @@ CREATE INDEX enquiries_interactions_id_type_created_at_idx ON enquiries_interact
 DROP INDEX IF EXISTS chat_messages_chat_id_idx;
 CREATE INDEX chat_messages_chat_id_idx ON chat_messages (chat_id);
 
+DROP INDEX IF EXISTS chat_messages_type_created_at_idx;
+CREATE INDEX chat_messages_type_created_at_idx ON chat_messages (type, created_at);
+
 DROP INDEX IF EXISTS agents_details_user_id_idx;
 CREATE INDEX agents_details_user_id_idx ON agents_details (user_id);
 
