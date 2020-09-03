@@ -257,6 +257,9 @@ CREATE INDEX chat_messages_transmitted_id_user_id_user_chat_role_idx ON chat_mes
 DROP INDEX IF EXISTS renter_search_filters_id_user_id_filter_type_idx;
 CREATE INDEX renter_search_filters_id_user_id_filter_type_idx ON renter_search_filters (id, user_id, filter_type);
 
+DROP INDEX IF EXISTS renter_search_filters_user_id_filter_type_idx;
+CREATE INDEX renter_search_filters_id_user_filter_type_idx ON renter_search_filters (user_id, filter_type);
+
 DROP INDEX IF EXISTS user_app_devices_user_id_device_id_app_key_idx;
 CREATE INDEX user_app_devices_user_id_device_id_app_key_idx ON user_app_devices (user_id, device_id, app_key);
 
