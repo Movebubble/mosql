@@ -40,6 +40,9 @@ notificationDB:
     - created_at:
       :source: createdAt
       :type: timestamp without time zone
+    - type:
+      :source: type
+      :type: CHARACTER VARYING
     :meta:
       :table: push_notifications
       :extra_props: JSON
@@ -77,6 +80,9 @@ notificationDB:
       - created_at:
         :source: createdAt
         :type: timestamp without time zone
+      - type:
+        :source: type
+        :type: CHARACTER VARYING
     :meta:
       :table: email_notifications
       :extra_props: JSON
