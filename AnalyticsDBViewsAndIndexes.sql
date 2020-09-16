@@ -361,3 +361,6 @@ CREATE INDEX renter_searches_user_id_idx ON renter_searches (user_id);
 
 DROP INDEX IF EXISTS property_watches_user_id_idx;
 CREATE INDEX property_watches_user_id_idx ON property_watches (user_id);
+
+DROP INDEX IF EXISTS push_notifications_device_id_idx;
+CREATE INDEX push_notifications_device_id_idx ON push_notifications (to_device_id);
