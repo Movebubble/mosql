@@ -155,6 +155,15 @@ videoDB:
     - video_text_extraction_processing_details_extracted_text:
       :source: videoTextExtractionProcessingDetails.extractedText
       :type: CHARACTER VARYING
+    - gif_boomerang_original_url:
+      :source: gifBoomerang.originalUrl
+      :type: CHARACTER VARYING
+    - gif_boomerang_mobile_size_url:
+      :source: gifBoomerang.mobileSizeUrl
+      :type: CHARACTER VARYING
+    - gif_boomerang_small_mobile_size_url:
+      :source: gifBoomerang.smallMobileSizeUrl
+      :type: CHARACTER VARYING
     :meta:
       :table: videos
       :extra_props: JSON
