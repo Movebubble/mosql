@@ -276,6 +276,15 @@ videoProcessingDB:
       - details_preview_boomerang_small_mobile_size_url:
         :source: details.previewBoomerang.smallMobileSizeUrl
         :type: CHARACTER VARYING
+      - details_gif_boomerang_original_url:
+        :source: details.gifBoomerang.originalUrl
+        :type: CHARACTER VARYING
+      - details_gif_boomerang_mobile_size_url:
+        :source: details.gifBoomerang.mobileSizeUrl
+        :type: CHARACTER VARYING
+      - details_gif_boomerang_small_mobile_size_url:
+        :source: details.gifBoomerang.smallMobileSizeUrl
+        :type: CHARACTER VARYING
       - details_original_video_s3_path:
         :source: details.originalVideoS3Path
         :type: CHARACTER VARYING
