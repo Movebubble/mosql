@@ -1,0 +1,21 @@
+propertyDB:
+  renterTracedMapSearches:
+    :columns:
+      - id:
+        :source: _id
+        :type: CHARACTER VARYING
+      - saved_search_id:
+        :source: savedSearchId
+        :type: CHARACTER VARYING    
+      - geo_shape_wkt:
+        :source: geoShapeWKT
+        :type: CHARACTER VARYING
+     - search_type:
+        :source: searchType
+        :type: CHARACTER VARYING   
+      - created_at:
+        :source: createdAt
+        :type: timestamp without time zone
+    :meta:
+      :table: renter_traced_map_searches
+      :extra_props: JSON

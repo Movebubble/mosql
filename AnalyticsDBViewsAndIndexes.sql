@@ -364,3 +364,6 @@ CREATE INDEX property_watches_user_id_idx ON property_watches (user_id);
 
 DROP INDEX IF EXISTS push_notifications_device_id_idx;
 CREATE INDEX push_notifications_device_id_idx ON push_notifications (to_device_id);
+
+DROP INDEX IF EXISTS renter_traced_map_searches_saved_search_id_idx;
+CREATE INDEX renter_traced_map_searches_saved_search_id_idx ON renter_traced_map_searches (saved_search_id);
