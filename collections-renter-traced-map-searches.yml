@@ -6,13 +6,13 @@ propertyDB:
         :type: CHARACTER VARYING
       - saved_search_id:
         :source: savedSearchId
-        :type: CHARACTER VARYING    
+        :type: CHARACTER VARYING
       - geo_shape_wkt:
         :source: geoShapeWKT
         :type: CHARACTER VARYING
      - search_type:
         :source: searchType
-        :type: CHARACTER VARYING   
+        :type: CHARACTER VARYING
       - created_at:
         :source: createdAt
         :type: timestamp without time zone
