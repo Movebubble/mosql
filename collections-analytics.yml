@@ -272,6 +272,27 @@ analyticsDB:
       - type_details_affordability_report_risk_profile_percentage:
         :source: typeDetails.affordabilityReportRiskProfilePercentage
         :type: INTEGER
+      - type_details_transaction_contract_length:
+        :source: typeDetails.transactionContractLength
+        :type: INTEGER
+      - type_details_transaction_contract_length_valid:
+        :source: typeDetails.transactionContractLengthValid
+        :type: BOOLEAN
+      - type_details_map_view_wkt:
+        :source: typeDetails.mapViewWKT
+        :type: CHARACTER VARYING
+      - type_details_zoom_level:
+        :source: typeDetails.zoomLevel
+        :type: BIGINT
+      - type_details_pin_type:
+        :source: typeDetails.pinType
+        :type: CHARACTER VARYING
+      - type_details_time_spent_millis:
+        :source: typeDetails.timeSpentMillis
+        :type: BIGINT
+      - type_details_transport_link_id:
+        :source: typeDetails.transportLinkId
+        :type: CHARACTER VARYING
       - client_date_time:
         :source: clientDateTime
         :type: timestamp without time zone
