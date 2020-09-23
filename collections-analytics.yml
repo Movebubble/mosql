@@ -289,7 +289,7 @@ analyticsDB:
         :type: CHARACTER VARYING
       - type_details_time_spent_millis:
         :source: typeDetails.timeSpentMillis
-        :type: BIGINT
+        :type: DECIMAL
       - type_details_transport_link_id:
         :source: typeDetails.transportLinkId
         :type: CHARACTER VARYING
