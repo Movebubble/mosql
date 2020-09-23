@@ -283,7 +283,7 @@ analyticsDB:
         :type: CHARACTER VARYING
       - type_details_zoom_level:
         :source: typeDetails.zoomLevel
-        :type: BIGINT
+        :type: DECIMAL
       - type_details_pin_type:
         :source: typeDetails.pinType
         :type: CHARACTER VARYING
