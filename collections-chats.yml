@@ -28,6 +28,12 @@ chatDB:
     - created_by:
       :source: createdBy.entityId
       :type: CHARACTER VARYING
+    - transaction_id:
+      :source: typeDetails.transaction.propertyTransactionId
+      :type: CHARACTER VARYING
+    - transaction_started_at:
+      :source: typeDetails.transaction.startedAt
+      :type: timestamp without time zone
     :meta:
       :table: chats
 
