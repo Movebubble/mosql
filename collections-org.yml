@@ -20,6 +20,9 @@ accountDB:
     - test:
       :source: test
       :type: BOOLEAN
+    - demo:
+      :source: demo
+      :type: BOOLEAN
     - created_at:
       :source: createdAt
       :type: timestamp without time zone
@@ -61,6 +64,9 @@ accountDB:
       :type: BOOLEAN
     - test:
       :source: test
+      :type: BOOLEAN
+    - demo:
+      :source: demo
       :type: BOOLEAN
     - created_at:
       :source: createdAt
