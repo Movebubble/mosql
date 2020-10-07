@@ -107,6 +107,9 @@ propertyDB:
     - advertizer_is_test:
       :source: advertiser.isTest
       :type: BOOLEAN
+    - advertizer_is_demo:
+      :source: advertiser.isDemo
+      :type: BOOLEAN
     - advertizer_is_hidden:
       :source: advertiser.isHidden
       :type: BOOLEAN
