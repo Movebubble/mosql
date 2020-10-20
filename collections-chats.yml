@@ -85,6 +85,9 @@ chatDB:
     - property_address:
       :source: details.propertyAddress
       :type: CHARACTER VARYING
+    - remind_me_later:
+      :source: details.remindMeLater
+      :type: BOOLEAN
     - created_entity_type:
       :source: createdBy.entityType
       :type: CHARACTER VARYING
