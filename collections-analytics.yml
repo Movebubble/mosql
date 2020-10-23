@@ -343,5 +343,11 @@ analyticsDB:
       - web_env_details_vendor:
         :source: webEnvDetails.vendor
         :type: CHARACTER VARYING
+      - type_details_email_key:
+        :source: typeDetails.emailKey
+        :type: CHARACTER VARYING
+      - type_details_en_id:
+        :source: typeDetails.enId
+        :type: CHARACTER VARYING
     :meta:
       :table: analytics_events
