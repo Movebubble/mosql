@@ -98,10 +98,11 @@ CREATE MATERIALIZED VIEW users_app_logins AS
     json_array_to_text_array(users_app_logins.ac -> 'appKeys'::text) AS app_keys,
     json_array_to_text_array(users_app_logins.ac -> 'userRoleIds'::text) AS user_role_ids,
     ( SELECT latest_status.status
-           FROM ( SELECT json_array_elements(app_credentials.ac -> 'statuses'::text) ->> 'status'::text AS status,
-                    (json_array_elements(app_credentials.ac -> 'statuses'::text) ->> 'createdAt'::text)::timestamp without time zone AS status_created_at
-                   FROM users_app_logins app_credentials
-                  ORDER BY ((json_array_elements(app_credentials.ac -> 'statuses'::text) ->> 'createdAt'::text)::timestamp without time zone) DESC
+           FROM ( SELECT json_array_elements(json_array_elements(users._extra_props -> 'appCredentials'::text) -> 'statuses'::text) ->> 'status'::text AS status,
+                    (json_array_elements(json_array_elements(users._extra_props -> 'appCredentials'::text) -> 'statuses'::text) ->> 'createdAt'::text)::timestamp without time zone AS status_created_at
+                  FROM users
+                  WHERE users_app_logins.id = users.id
+                  ORDER BY ((json_array_elements(json_array_elements(users._extra_props -> 'appCredentials'::text) -> 'statuses'::text) ->> 'createdAt'::text)::timestamp without time zone) DESC
                  LIMIT 1) latest_status) AS status
    FROM users_app_logins;
 REFRESH MATERIALIZED VIEW users_app_logins;
