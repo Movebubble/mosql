@@ -7,7 +7,7 @@ def dockerRegistry       = "https://${dockerRegistryHost}"
 def dockerRegistryCredId = 'docker-artifactory-credentials'
 def artifactoryCredId    = 'artifactory-credentials'
 
-def deployDockerImage    = "${dockerRegistryHost}/helmfile:v0.86.8"
+def deployDockerImage    = "${dockerRegistryHost}/helmfile:v0.116.1"
 def helmRepoUrl          = 'https://artifactory.int.mgmt.movebubble.com/artifactory/helm'
 
 def slackTeam            = 'Movebubble'
@@ -193,7 +193,6 @@ pipeline {
 
               gpg --import $GPG_FILE
 
-              helm init --client-only
               helm repo add --username=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_PASSWORD} movebubble ${HELM_REPO_URL}
 
               for APP in $APP_LIST; do
@@ -262,7 +261,6 @@ pipeline {
 
               gpg --import $GPG_FILE
 
-              helm init --client-only
               helm repo add --username=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_PASSWORD} movebubble ${HELM_REPO_URL}
 
               echo "[INFO] Stop all MoSQL jobs"

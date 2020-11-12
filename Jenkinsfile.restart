@@ -7,7 +7,7 @@ def dockerRegistry       = "https://${dockerRegistryHost}"
 def dockerRegistryCredId = 'docker-artifactory-credentials'
 def artifactoryCredId    = 'artifactory-credentials'
 
-def deployDockerImage    = "${dockerRegistryHost}/helmfile:v0.86.10"
+def deployDockerImage    = "${dockerRegistryHost}/helmfile:v0.116.1"
 def helmRepoLocalUrl     = 'https://artifactory.int.mgmt.movebubble.com/artifactory/helm-local'
 def helmRepoUrl          = 'https://artifactory.int.mgmt.movebubble.com/artifactory/helm'
 
@@ -161,7 +161,6 @@ pipeline {
 
             gpg --import $GPG_FILE
 
-            helm init --client-only
             helm repo add --username=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_PASSWORD} movebubble ${HELM_REPO_URL}
 
             if [ "mosql" = "$APP_NAME" ]; then
