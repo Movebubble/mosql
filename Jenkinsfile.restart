@@ -7,7 +7,7 @@ def dockerRegistry       = "https://${dockerRegistryHost}"
 def dockerRegistryCredId = 'docker-artifactory-credentials'
 def artifactoryCredId    = 'artifactory-credentials'
 
-def deployDockerImage    = "${dockerRegistryHost}/helmfile:v0.116.1"
+def deployDockerImage    = "${dockerRegistryHost}/helmfile:v0.116.2"
 def helmRepoLocalUrl     = 'https://artifactory.int.mgmt.movebubble.com/artifactory/helm-local'
 def helmRepoUrl          = 'https://artifactory.int.mgmt.movebubble.com/artifactory/helm'
 
