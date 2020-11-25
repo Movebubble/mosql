@@ -42,10 +42,12 @@ DROP MATERIALIZED VIEW IF EXISTS property_sources;
 CREATE MATERIALIZED VIEW property_sources AS
  WITH p_sources AS (
          SELECT properties.id,
+            properties.advertizer_unit_id,
             json_array_elements(properties._extra_props -> 'sources'::text) AS s
            FROM properties
         )
  SELECT p_sources.id,
+    p_sources.advertizer_unit_id AS unit_id,
     p_sources.s ->> 'sourceId'::text AS source_id,
     p_sources.s ->> 'sourceType'::text AS source_type,
     p_sources.s ->> 'sourceSubType'::text AS source_sub_type
